@@ -1,25 +1,24 @@
 export default function HeroGenerator({ children }) {
   return (
-    <section className="relative w-full min-h-[85vh] bg-slate-900 pt-24 pb-12 flex flex-col items-center">
-      {/* Background decoration */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-600/20 blur-[100px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-600/20 blur-[100px]" />
-      </div>
-
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 text-center mb-10">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-4">
-          Create Custom <span className="text-blue-500">QR Codes</span> Instantly
+    <header className="relative pt-20 pb-32 overflow-hidden bg-background">
+      {/* Ambient background glow from Designref */}
+      <div 
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-sky-900/20 via-background to-transparent -z-10"
+      />
+      
+      <div className="max-w-7xl mx-auto px-6 text-center">
+        <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white mb-6 text-glow leading-tight">
+          Free & Instant <span className="text-primary italic">QR Code</span> Generator
         </h1>
-        <p className="text-lg text-slate-300 max-w-2xl mx-auto">
-          No sign-up required. Just type and pause to generate beautiful, high-quality QR codes tailored entirely to your brand.
+        <p className="text-xl text-on-surface-variant max-w-2xl mx-auto mb-16 font-medium">
+          No sign-up. No tracking. Just type, pause, and download your high-quality vector QR codes instantly.
         </p>
-      </div>
 
-      {/* The Generator Widget fits here */}
-      <div className="relative z-20 w-full max-w-5xl mx-auto px-4">
-        {children}
+        {/* The Generator Widget Slot */}
+        <div className="relative z-20">
+          {children}
+        </div>
       </div>
-    </section>
+    </header>
   );
 }
