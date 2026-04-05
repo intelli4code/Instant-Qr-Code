@@ -12,17 +12,17 @@ export default function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 100, damping: 20 }}
-      className="bg-white/80 dark:bg-slate-950/60 backdrop-blur-xl border-b border-slate-200 dark:border-sky-400/10 shadow-lg dark:shadow-2xl shadow-slate-200/50 dark:shadow-sky-900/20 font-inter antialiased top-0 sticky z-50 px-6 py-4 transition-colors duration-300"
+      className="sticky top-0 z-[60] w-full border-b border-on-surface-variant/10 bg-glass-bg backdrop-blur-2xl transition-all duration-500"
     >
-      <div className="max-w-7xl mx-auto flex justify-between items-center w-full">
+      <div className="max-w-7xl mx-auto flex justify-between items-center w-full px-6 py-4">
         <Link to="/" className="flex items-center gap-2 group">
-          <span className="material-symbols-outlined text-primary text-3xl group-hover:rotate-12 transition-transform">qr_code_2</span>
-          <span className="text-xl font-bold tracking-tight text-slate-800 dark:text-white hover:text-primary dark:hover:text-glow transition-all">
-            Instant <span className="text-primary italic italic tracking-wider">QR</span>
+          <span className="material-symbols-outlined text-primary text-3xl group-hover:rotate-12 transition-transform drop-shadow-[0_0_10px_rgba(14,165,233,0.3)]">qr_code_2</span>
+          <span className="text-xl font-bold tracking-tight text-on-surface hover:text-primary transition-all">
+            Instant <span className="text-primary italic tracking-wider">QR</span>
           </span>
         </Link>
         
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-8">
           {[
             { name: "Features", path: "/#features" },
             { name: "FAQ", path: "/#faq" },
@@ -32,17 +32,17 @@ export default function Navbar() {
             <Link 
               key={idx}
               to={link.path}
-              className="text-sm font-semibold transition-all hover:text-primary text-slate-600 dark:text-sky-300"
+              className="text-sm font-semibold transition-all hover:text-primary text-on-surface-variant hover:translate-y-[-1px]"
             >
               {link.name}
             </Link>
           ))}
         </div>
 
-        <div className="flex items-center gap-2 sm:gap-4">
+        <div className="flex items-center gap-3 sm:gap-4">
           <button 
             onClick={toggleTheme}
-            className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-primary/5 text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-all group"
+            className="p-2.5 rounded-xl hover:bg-primary/10 text-on-surface-variant hover:text-primary transition-all border border-transparent hover:border-primary/20"
             title="Toggle Theme"
           >
             <span className="material-symbols-outlined text-xl">
@@ -52,10 +52,10 @@ export default function Navbar() {
 
           <button 
             onClick={() => setIsHistoryOpen(true)}
-            className="hidden sm:flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-primary transition-colors py-2 px-3 rounded-lg hover:bg-slate-100 dark:hover:bg-primary/5 group"
+            className="hidden sm:flex items-center gap-2 text-on-surface-variant hover:text-primary transition-all py-2.5 px-4 rounded-xl hover:bg-primary/10 border border-transparent hover:border-primary/20 group"
           >
             <span className="material-symbols-outlined text-sm group-hover:rotate-12 transition-transform">history</span>
-            <span className="text-xs font-bold uppercase tracking-widest pt-0.5 whitespace-nowrap">Recent</span>
+            <span className="text-xs font-black uppercase tracking-widest pt-0.5 whitespace-nowrap">Recent</span>
           </button>
 
           <motion.div 
@@ -66,7 +66,7 @@ export default function Navbar() {
             <a 
               href="https://github.com/intelli4code" 
               target="_blank" 
-              className="bg-primary/10 text-primary border border-primary/20 px-4 py-2 rounded-lg text-xs font-black uppercase tracking-widest hover:bg-primary hover:text-sky-950 transition-all flex items-center gap-2 whitespace-nowrap"
+              className="bg-primary text-slate-900 dark:text-sky-950 px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest hover:brightness-110 shadow-lg shadow-primary/20 transition-all flex items-center gap-2 whitespace-nowrap"
             >
               <span className="material-symbols-outlined text-sm">code</span>
               API <span className="hidden sm:inline">Docs</span>

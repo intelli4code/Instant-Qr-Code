@@ -14,12 +14,12 @@ export default function PrivacyShield() {
           transition={{ duration: 0.8 }}
           className="order-2 md:order-1"
         >
-          <div className="flex items-center gap-3 mb-6">
-            <span className="material-symbols-outlined text-primary text-4xl">shield_locked</span>
-            <h2 className="text-3xl md:text-5xl font-extrabold text-white text-glow">Military-Grade Privacy</h2>
+          <div className="flex items-center gap-4 mb-8">
+            <span className="material-symbols-outlined text-primary text-6xl md:text-8xl drop-shadow-[0_0_20px_rgba(14,165,233,0.3)]">shield_locked</span>
+            <h2 className="text-3xl md:text-5xl font-extrabold text-on-surface text-glow leading-tight">Military-Grade <br className="hidden md:block" /> Privacy</h2>
           </div>
-          <p className="text-on-surface-variant text-lg leading-relaxed mb-6">
-            We believe your data belongs to you. Unlike other QR generators that send your information to their servers for tracking, <span className="text-white font-bold italic">Instant QR generates everything directly in your browser.</span>
+          <p className="text-on-surface-variant text-lg leading-relaxed mb-6 font-medium">
+            We believe your data belongs to you. Unlike other QR generators that send your information to their servers for tracking, <span className="text-primary font-black italic">Instant QR generates everything directly in your browser.</span>
           </p>
           
           <ul className="space-y-4">
@@ -35,7 +35,7 @@ export default function PrivacyShield() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.5 + idx * 0.1 }}
                 viewport={{ once: true }}
-                className="flex items-center gap-3 text-white font-bold"
+                className="flex items-center gap-3 text-on-surface font-black"
               >
                 <span className="material-symbols-outlined text-primary">done_all</span>
                 {point}

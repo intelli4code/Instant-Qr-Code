@@ -19,7 +19,7 @@ export default function FAQ() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4 text-glow">Frequently Asked Questions</h2>
+          <h2 className="text-3xl md:text-5xl font-extrabold text-on-surface mb-4 text-glow">Frequently Asked Questions</h2>
           <p className="text-on-surface-variant font-medium">Everything you need to know about our professional QR toolkit.</p>
         </motion.div>
 
@@ -42,13 +42,13 @@ function FAQItem({ faq, index }) {
       whileInView={{ opacity: 1, x: 0 }}
       transition={{ delay: index * 0.1 }}
       viewport={{ once: true }}
-      className={`glass-card rounded-2xl border transition-all ${isOpen ? 'border-primary/50 shadow-lg shadow-primary/10' : 'border-sky-400/5 hover:border-sky-400/20'}`}
+      className={`glass-card rounded-2xl border transition-all ${isOpen ? 'border-primary/50 shadow-lg shadow-primary/10' : 'border-on-surface-variant/10 hover:border-primary/20'}`}
     >
       <button 
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex justify-between items-center p-6 text-left"
       >
-        <span className={`font-bold text-lg transition-colors ${isOpen ? 'text-primary' : 'text-white'}`}>{faq.q}</span>
+        <span className={`font-bold text-lg transition-colors ${isOpen ? 'text-primary' : 'text-on-surface'}`}>{faq.q}</span>
         <span className={`material-symbols-outlined transition-transform duration-300 text-primary ${isOpen ? 'rotate-180' : ''}`}>
           expand_more
         </span>
@@ -62,7 +62,7 @@ function FAQItem({ faq, index }) {
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="overflow-hidden"
           >
-            <div className="px-6 pb-6 text-on-surface-variant text-sm leading-relaxed border-t border-sky-400/5 pt-4">
+            <div className="px-6 pb-6 text-on-surface-variant text-sm leading-relaxed border-t border-on-surface-variant/10 pt-4">
               {faq.a}
             </div>
           </motion.div>

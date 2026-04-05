@@ -74,19 +74,19 @@ export default function GeneratorWidget() {
   }, [debouncedConfig, setHistory]);
 
   return (
-    <div className="w-full max-w-[1200px] lg:w-[75%] min-h-[700px] mx-auto glass-card-elevated rounded-2xl shadow-2xl flex flex-col md:grid md:grid-cols-12 overflow-hidden text-left border border-sky-400/20 transition-all duration-500">
+    <div className="w-full max-w-[1200px] lg:w-[75%] min-h-[700px] mx-auto glass-card-elevated rounded-[2.5rem] shadow-2xl flex flex-col md:grid md:grid-cols-12 overflow-hidden text-left border border-white/5 dark:border-sky-400/10 transition-all duration-500">
       
       {/* Left Column: Settings */}
-      <div className="md:col-span-7 p-8 border-b md:border-b-0 md:border-r border-sky-400/10 bg-surface/40">
+      <div className="md:col-span-7 p-10 border-b md:border-b-0 md:border-r border-sky-400/10 bg-surface/30 backdrop-blur-md">
         
         {/* Tab Switcher */}
-        <div className="flex gap-4 mb-8">
+        <div className="flex gap-4 mb-10 overflow-x-auto pb-2 scrollbar-hide">
           <button 
             onClick={() => setActiveTab("content")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
+            className={`flex items-center gap-2 px-6 py-3 rounded-2xl font-black text-xs uppercase tracking-widest transition-all ${
               activeTab === "content" 
-                ? "bg-primary/10 text-primary border border-primary/20 shadow-sm" 
-                : "text-on-surface-variant hover:bg-surface-container transition-colors"
+                ? "bg-primary text-white dark:text-sky-950 shadow-lg shadow-primary/20" 
+                : "text-on-surface-variant hover:bg-primary/10 hover:text-primary"
             }`}
           >
             <span className="material-symbols-outlined text-sm">link</span>
@@ -94,10 +94,10 @@ export default function GeneratorWidget() {
           </button>
           <button 
             onClick={() => setActiveTab("design")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
+            className={`flex items-center gap-2 px-6 py-3 rounded-2xl font-black text-xs uppercase tracking-widest transition-all ${
               activeTab === "design" 
-                ? "bg-primary/10 text-primary border border-primary/20 shadow-sm" 
-                : "text-on-surface-variant hover:bg-surface-container transition-colors"
+                ? "bg-primary text-white dark:text-sky-950 shadow-lg shadow-primary/20" 
+                : "text-on-surface-variant hover:bg-primary/10 hover:text-primary"
             }`}
           >
             <span className="material-symbols-outlined text-sm">palette</span>
@@ -106,7 +106,7 @@ export default function GeneratorWidget() {
         </div>
 
         {/* Conditional Content/Design Rendering */}
-        <div className="min-h-[300px]">
+        <div className="min-h-[400px]">
           {activeTab === "content" ? (
             <ContentTabs config={config} setConfig={setConfig} />
           ) : (
@@ -116,7 +116,8 @@ export default function GeneratorWidget() {
       </div>
 
       {/* Right Column: Preview */}
-      <div className="md:col-span-5 p-8 flex flex-col items-center justify-center bg-surface-container-high/30">
+      <div className="md:col-span-5 p-10 flex flex-col items-center justify-center bg-primary/5 dark:bg-slate-950/40 relative">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent pointer-events-none" />
         <PreviewPanel 
           debouncedConfig={debouncedConfig} 
           isGenerating={isGenerating} 

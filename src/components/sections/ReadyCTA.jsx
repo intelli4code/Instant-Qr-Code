@@ -18,17 +18,17 @@ export default function ReadyCTA() {
           className="glass-card-elevated p-12 md:p-20 rounded-[2rem] border border-primary/20 shadow-2xl overflow-hidden relative"
         >
           {/* Internal glowing elements */}
-          <div className="absolute -top-10 -right-10 w-32 h-32 bg-primary/20 blur-3xl rounded-full" />
-          <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-primary/20 blur-3xl rounded-full" />
+          <div className="absolute -top-10 -right-10 w-32 h-32 bg-primary/20 dark:bg-primary/20 blur-3xl rounded-full" />
+          <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-primary/20 dark:bg-primary/20 blur-3xl rounded-full" />
           
-          <h2 className="text-4xl md:text-6xl font-extrabold text-white mb-8 tracking-tighter text-glow">Ready to Generate Your <span className="italic text-primary">Instant QR</span>?</h2>
+          <h2 className="text-4xl md:text-6xl font-extrabold text-on-surface mb-8 tracking-tighter text-glow">Ready to Generate Your <span className="italic text-primary">Instant QR</span>?</h2>
           <p className="text-on-surface-variant text-lg md:text-xl mb-12 max-w-2xl mx-auto font-medium">
             Join thousands of users creating professional, secure, and high-resolution QR codes in seconds. No account required.
           </p>
 
           <button 
             onClick={handleScrollToTop}
-            className="group relative px-10 py-5 bg-primary text-sky-950 font-black text-lg rounded-2xl shadow-xl shadow-primary/30 hover:scale-105 active:scale-95 transition-all outline-none focus:ring-4 focus:ring-primary/20"
+            className="group relative px-10 py-5 bg-primary text-sky-950 dark:text-sky-950 font-black text-lg rounded-2xl shadow-xl shadow-primary/30 hover:scale-105 active:scale-95 transition-all outline-none focus:ring-4 focus:ring-primary/20"
           >
             <span className="relative z-10 flex items-center gap-3">
               Get Started Now

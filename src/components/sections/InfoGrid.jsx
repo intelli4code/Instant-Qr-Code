@@ -42,13 +42,13 @@ export default function InfoGrid() {
               <motion.div 
                 key={idx}
                 whileHover={{ scale: 1.05, rotate: 1 }}
-                className="glass-card p-8 rounded-2xl border border-sky-400/10 hover:border-primary/50 transition-all cursor-default"
+                className="glass-card-elevated p-8 rounded-3xl border border-on-surface-variant/10 hover:border-primary/50 transition-all cursor-default"
               >
-                <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${item.color}`}>
-                  <span className="material-symbols-outlined text-2xl">{item.icon}</span>
+                <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 border border-on-surface-variant/10 bg-surface group-hover:border-primary/50 transition-all duration-500 shadow-sm">
+                  <span className="material-symbols-outlined text-3xl text-on-surface group-hover:text-primary transition-colors font-light">{item.icon}</span>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
-                <p className="text-on-surface-variant text-sm leading-relaxed">{item.desc}</p>
+                <h3 className="text-xl font-black text-on-surface mb-3 tracking-tighter">{item.title}</h3>
+                <p className="text-on-surface-variant text-sm leading-relaxed font-medium">{item.desc}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -59,17 +59,17 @@ export default function InfoGrid() {
             viewport={{ once: true }}
             className="flex flex-col gap-6"
           >
-            <h2 className="text-3xl md:text-5xl font-extrabold text-white text-glow mb-6">Designed for Professionals</h2>
-            <p className="text-on-surface-variant text-lg leading-relaxed mb-8 border-l-4 border-primary pl-6">
-              Instant QR isn't just another generator. We built it for designers, developers, and small business owners who need <span className="text-white font-bold italic">fast, secure, and high-quality results.</span>
+            <h2 className="text-3xl md:text-5xl font-extrabold text-on-surface text-glow mb-6 tracking-tighter">Designed for Professionals</h2>
+            <p className="text-on-surface-variant text-lg leading-relaxed mb-8 border-l-4 border-primary pl-6 font-medium">
+              Instant QR isn't just another generator. We built it for designers, developers, and small business owners who need <span className="text-primary font-black italic">fast, secure, and high-quality results.</span>
             </p>
             <div className="flex flex-col gap-4">
-              <div className="flex items-center gap-4 text-white">
-                <span className="material-symbols-outlined text-primary">verified</span>
+              <div className="flex items-center gap-4 text-on-surface font-bold">
+                <span className="material-symbols-outlined text-primary font-black">verified</span>
                 <span>Fully compliant with ISO/IEC 18004 standards</span>
               </div>
-              <div className="flex items-center gap-4 text-white">
-                <span className="material-symbols-outlined text-primary">verified</span>
+              <div className="flex items-center gap-4 text-on-surface font-bold">
+                <span className="material-symbols-outlined text-primary font-black">verified</span>
                 <span>Optimized for 99.9% scanner compatibility</span>
               </div>
             </div>

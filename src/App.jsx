@@ -9,7 +9,6 @@ import BulkGenerator from "./pages/BulkGenerator";
 import ScrollToHash from "./components/utils/ScrollToHash";
 import { HistoryProvider } from "./context/HistoryContext";
 import { ThemeProvider } from "./context/ThemeContext";
-
 import HistoryDrawer from "./components/generator/HistoryDrawer";
 
 export default function App() {
@@ -18,7 +17,7 @@ export default function App() {
       <ThemeProvider>
         <HistoryProvider>
           <ScrollToHash />
-          <div className="min-h-screen bg-white dark:bg-background flex flex-col font-inter text-slate-900 dark:text-slate-200 transition-colors duration-300">
+          <div className="min-h-screen bg-background flex flex-col font-inter text-on-surface transition-colors duration-500">
             <Navbar />
             
             <Routes>

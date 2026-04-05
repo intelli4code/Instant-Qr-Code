@@ -1,20 +1,34 @@
 @import "tailwindcss";
 
+@theme {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-variant: var(--on-surface-variant);
+  --color-primary: var(--primary);
+  --color-glass-bg: var(--glass-bg);
+  --color-glass-border: var(--glass-border);
+  --color-glass-elevated: var(--glass-elevated);
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  /* Theme Transitions */
-  transition: background-color 0.3s ease, color 0.3s ease;
-
-  /* Default Light Mode Vars (though we'll default to dark in UI) */
+  /* Premium Light Mode: Pristine Ice */
   --background: #f8fafc;
-  --surface: rgba(255, 255, 255, 0.7);
-  --on-surface: #1e293b;
-  --glass-bg: rgba(255, 255, 255, 0.6);
-  --glass-border: rgba(125, 211, 252, 0.2);
-  --glass-elevated: rgba(255, 255, 255, 0.85);
+  --surface: #ffffff;
+  --on-surface: #0f172a;
+  --on-surface-variant: #475569;
+  --primary: #2563eb;
+  --primary-glow: rgba(37, 99, 235, 0.15);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(15, 23, 42, 0.08);
+  --glass-elevated: rgba(255, 255, 255, 0.95);
+
+  /* Theme Transitions */
+  transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
   color-scheme: light dark;
   background-color: var(--background);
@@ -27,12 +41,16 @@
 }
 
 html.dark {
-  --background: #0a0e1a;
-  --surface: #0f1524;
-  --on-surface: #e0e8f0;
-  --glass-bg: rgba(15, 21, 36, 0.6);
-  --glass-border: rgba(125, 211, 252, 0.1);
-  --glass-elevated: rgba(15, 21, 36, 0.75);
+  /* Premium Dark Mode: Deep Night */
+  --background: #020617;
+  --surface: #0f172a;
+  --on-surface: #f8fafc;
+  --on-surface-variant: #94a3b8;
+  --primary: #0ea5e9;
+  --primary-glow: rgba(14, 165, 233, 0.25);
+  --glass-bg: rgba(15, 23, 42, 0.6);
+  --glass-border: rgba(125, 211, 252, 0.12);
+  --glass-elevated: rgba(15, 23, 42, 0.75);
 }
 
 body {
@@ -41,6 +59,7 @@ body {
   background-color: var(--background);
   color: var(--on-surface);
   overflow-x: hidden;
+  transition: background-color 0.4s ease;
 }
 
 @layer utilities {
@@ -52,17 +71,50 @@ body {
 
   .glass-card {
     background: var(--glass-bg);
-    backdrop-filter: blur(16px);
+    backdrop-filter: blur(12px);
     border: 1px solid var(--glass-border);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
   }
 
   .glass-card-elevated {
     background: var(--glass-elevated);
-    backdrop-filter: blur(24px);
+    backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
   }
 
   .text-glow {
-    text-shadow: 0 0 20px rgba(125, 211, 252, 0.3);
+    text-shadow: 0 0 15px var(--primary-glow);
   }
+
+  .border-glow {
+    box-shadow: 0 0 20px var(--primary-glow);
+  }
+
+  .focus-tactile {
+    @apply transition-all duration-300;
+  }
+
+  .focus-tactile:focus, 
+  .focus-tactile:focus-within {
+    border-width: 3px;
+    border-color: color-mix(in srgb, var(--primary), transparent 40%);
+    --tw-ring-color: color-mix(in srgb, var(--primary), transparent 90%);
+    box-shadow: 0 0 0 4px var(--tw-ring-color), 0 10px 15px -3px var(--primary-glow);
+    outline: none;
+    transform: scale(1.01);
+  }
+}
+
+/* Global Input Focus Overrides */
+input, textarea, select {
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-width: 3px !important;
+  border-color: color-mix(in srgb, var(--primary), transparent 50%) !important;
+  --tw-ring-color: color-mix(in srgb, var(--primary), transparent 95%);
+  box-shadow: 0 0 0 4px var(--tw-ring-color), 0 4px 6px -1px var(--primary-glow) !important;
 }

@@ -165,23 +165,23 @@ export default function PreviewPanel({ debouncedConfig, isGenerating }) {
         <div className="grid grid-cols-2 gap-3">
           <button
             onClick={() => handleDownload("svg")}
-            className="w-full bg-slate-900 border border-slate-200 dark:border-sky-400/10 hover:bg-slate-200 dark:hover:bg-slate-950 text-slate-800 dark:text-slate-300 font-bold py-3 rounded-xl transition-all flex items-center justify-center gap-2 active:scale-95 text-[10px] uppercase tracking-widest"
+            className="w-full bg-surface/40 dark:bg-slate-900 border border-on-surface-variant/10 dark:border-sky-400/10 hover:bg-surface/60 dark:hover:bg-slate-950 text-on-surface dark:text-slate-300 font-black py-3 rounded-xl transition-all flex items-center justify-center gap-2 active:scale-95 text-[10px] uppercase tracking-widest shadow-sm"
           >
             SVG Vector
           </button>
           <button
             onClick={handlePDFDownload}
-            className="w-full bg-slate-900 border border-emerald-400/10 hover:bg-slate-950 text-emerald-400 font-bold py-3 rounded-xl transition-all flex items-center justify-center gap-2 active:scale-95 text-[10px] uppercase tracking-widest"
+            className="w-full bg-emerald-500/5 dark:bg-slate-900 border border-emerald-500/20 dark:border-emerald-400/10 hover:bg-emerald-500/10 dark:hover:bg-slate-950 text-emerald-700 dark:text-emerald-400 font-black py-3 rounded-xl transition-all flex items-center justify-center gap-2 active:scale-95 text-[10px] uppercase tracking-widest shadow-sm"
           >
-            <span className="material-symbols-outlined text-sm">print</span>
+            <span className="material-symbols-outlined text-sm font-black">print</span>
             Labels
           </button>
         </div>
         <button
           onClick={() => setIsSimulatorOpen(true)}
-          className="w-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-sky-400/10 hover:bg-slate-200 dark:hover:bg-slate-950 text-slate-800 dark:text-sky-300 font-bold py-3 rounded-xl transition-all flex items-center justify-center gap-2 active:scale-95 text-[10px] uppercase tracking-widest mt-2"
+          className="w-full bg-surface/40 dark:bg-slate-900 border border-on-surface-variant/10 dark:border-sky-400/10 hover:bg-surface/60 dark:hover:bg-slate-950 text-on-surface dark:text-sky-300 font-black py-3 rounded-xl transition-all flex items-center justify-center gap-2 active:scale-95 text-[10px] uppercase tracking-widest mt-2 shadow-sm"
         >
-          <span className="material-symbols-outlined text-sm">phone_iphone</span>
+          <span className="material-symbols-outlined text-sm font-black">phone_iphone</span>
           See it on Mobile
         </button>
       </div>
