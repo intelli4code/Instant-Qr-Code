@@ -40,17 +40,6 @@ export default function HeroGenerator({ children }) {
         </motion.div>
       </div>
 
-      {/* Decorative scroll indicator */}
-      <motion.div 
-        animate={{ y: [0, 8, 0] }}
-        transition={{ repeat: Infinity, duration: 2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:block"
-      >
-        <div className="w-6 h-10 border-2 border-sky-400/20 rounded-full flex justify-center pt-2">
-          <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
-        </div>
-      </motion.div>
-
     </section>
   );
 }
