@@ -9,50 +9,70 @@ export default function DesignTabs({ config, setConfig }) {
     });
   };
 
-  return (
-    <div className="flex flex-col flex-1 border-t border-slate-200 pt-6 mt-2">
-      <h2 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-6">2. Beautiful Design</h2>
-      
-      <div className="grid grid-cols-2 gap-6">
-        {/* Colors */}
-        <div>
-          <label className="block text-sm font-medium text-slate-700 mb-3">QR Code Color</label>
-          <div className="flex items-center gap-3">
-            <div className="relative">
-              <input 
-                type="color" 
-                value={config.design.fgColor} 
-                onChange={(e) => handleDesignChange("fgColor", e.target.value)}
-                className="w-10 h-10 rounded-lg cursor-pointer border-0 p-0"
-              />
-              <div 
-                className="absolute inset-0 rounded-lg border border-slate-200 pointer-events-none" 
-                style={{ backgroundColor: config.design.fgColor }} 
-              />
-            </div>
-            <span className="text-sm text-slate-500 uppercase tracking-widest">{config.design.fgColor}</span>
-          </div>
-        </div>
+  const presetColors = ["#ffffff", "#7dd3fc", "#c8a0f0", "#ff6b6b", "#000000"];
 
-        {/* Pattern Style */}
-        <div>
-          <label className="block text-sm font-medium text-slate-700 mb-3">Pattern Style</label>
-          <div className="grid grid-cols-3 gap-2">
-            {["squares", "dots", "rounded"].map(type => (
-              <button
-                key={type}
-                onClick={() => handleDesignChange("pattern", type)}
-                className={`py-2 px-1 border rounded-lg text-xs font-semibold capitalize transition-colors ${
-                  config.design.pattern === type 
-                    ? "border-blue-500 bg-blue-50 text-blue-600" 
-                    : "border-slate-200 bg-white text-slate-500 hover:bg-slate-50"
-                }`}
-              >
-                {type}
-              </button>
-            ))}
+  return (
+    <div className="space-y-8 animate-in fade-in slide-in-from-right-4 duration-500">
+      
+      {/* Colors Section */}
+      <div>
+        <label className="block text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-4">
+          QR Code Styling
+        </label>
+        
+        <div className="grid grid-cols-2 gap-8">
+          <div>
+            <h4 className="text-xs font-semibold text-slate-400 mb-3">Color Accent</h4>
+            <div className="flex flex-wrap gap-3">
+              {presetColors.map(color => (
+                <button
+                  key={color}
+                  onClick={() => handleDesignChange("fgColor", color)}
+                  className={`w-8 h-8 rounded-full border-2 transition-all ${
+                    config.design.fgColor === color ? "border-primary scale-110 shadow-lg shadow-primary/20" : "border-outline/20 hover:border-outline/50"
+                  }`}
+                  style={{ backgroundColor: color }}
+                />
+              ))}
+              <div className="relative group">
+                <input 
+                  type="color" 
+                  value={config.design.fgColor} 
+                  onChange={(e) => handleDesignChange("fgColor", e.target.value)}
+                  className="w-8 h-8 rounded-full cursor-pointer bg-surface-container border-2 border-outline/20 p-0 overflow-hidden"
+                />
+                <span className="absolute -top-6 left-1/2 -translate-x-1/2 bg-slate-800 text-[8px] px-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">Custom</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h4 className="text-xs font-semibold text-slate-400 mb-3">Corner Shape</h4>
+            <div className="flex gap-3">
+              {["squares", "dots", "rounded"].map((pattern) => (
+                <button
+                  key={pattern}
+                  onClick={() => handleDesignChange("pattern", pattern)}
+                  className={`w-10 h-10 rounded-lg flex items-center justify-center border-2 transition-all ${
+                    config.design.pattern === pattern 
+                      ? "border-primary bg-primary/10 text-primary" 
+                      : "border-outline/20 text-on-surface-variant hover:border-outline/50 hover:bg-surface-container"
+                  }`}
+                >
+                  <div className={`w-5 h-5 border-2 border-current ${
+                    pattern === 'squares' ? 'rounded-none' : pattern === 'dots' ? 'rounded-full' : 'rounded-md'
+                  }`} />
+                </button>
+              ))}
+            </div>
           </div>
         </div>
+      </div>
+
+      <div className="pt-4 border-t border-sky-400/5">
+        <p className="text-[10px] text-on-surface-variant/60 uppercase tracking-widest font-medium">
+          Note: Static QR codes support real-time preview updates.
+        </p>
       </div>
     </div>
   );

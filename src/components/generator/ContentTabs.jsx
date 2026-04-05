@@ -1,12 +1,4 @@
-import { Link2, Type, Wifi } from "lucide-react";
-
 export default function ContentTabs({ config, setConfig }) {
-  const tabs = [
-    { id: "url", label: "Link", icon: <Link2 className="w-4 h-4" /> },
-    { id: "text", label: "Text", icon: <Type className="w-4 h-4" /> },
-    { id: "wifi", label: "WiFi", icon: <Wifi className="w-4 h-4" /> }
-  ];
-
   const handleCategoryChange = (cat) => {
     setConfig({ ...config, category: cat });
   };
@@ -16,7 +8,6 @@ export default function ContentTabs({ config, setConfig }) {
       ...config,
       content: {
         ...config.content,
-        // If it's wifi, we need to update the nested object, else straight update
         ...(config.category === "wifi" 
             ? { wifi: { ...config.content.wifi, [field]: value } }
             : { [config.category]: value })
@@ -25,85 +16,73 @@ export default function ContentTabs({ config, setConfig }) {
   };
 
   return (
-    <div className="flex flex-col mb-6">
-      <h2 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">1. What's your QR for?</h2>
+    <div className="space-y-6 animate-in fade-in slide-in-from-left-4 duration-500">
       
-      {/* Category Selector */}
-      <div className="flex space-x-2 bg-slate-100 p-1 rounded-xl mb-6">
-        {tabs.map(tab => (
+      {/* Category Icons Sub-switcher */}
+      <div className="flex gap-3 mb-6">
+        {["url", "text", "wifi"].map((cat) => (
           <button
-            key={tab.id}
-            onClick={() => handleCategoryChange(tab.id)}
-            className={`flex items-center justify-center gap-2 flex-1 py-3 px-4 rounded-lg text-sm font-semibold transition-all ${
-              config.category === tab.id 
-                ? "bg-white shadow-sm text-blue-600" 
-                : "text-slate-500 hover:text-slate-700 hover:bg-slate-200/50"
+            key={cat}
+            onClick={() => handleCategoryChange(cat)}
+            className={`px-3 py-1.5 rounded-md text-xs font-bold uppercase tracking-wider transition-all ${
+              config.category === cat 
+                ? "bg-sky-400 text-sky-950 shadow-lg shadow-sky-400/20" 
+                : "bg-surface-container text-on-surface-variant hover:text-on-surface"
             }`}
           >
-            {tab.icon}
-            {tab.label}
+            {cat}
           </button>
         ))}
       </div>
 
-      {/* Inputs Configuration */}
-      <div className="space-y-4">
+      <div>
+        <label className="block text-sm font-medium text-on-surface-variant mb-3 uppercase tracking-widest text-[10px]">
+          {config.category === "url" ? "Target URL" : config.category === "text" ? "Plain Text" : "SSID Name"}
+        </label>
+        
         {config.category === "url" && (
-          <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">Website URL</label>
-            <input 
-              type="url"
-              placeholder="https://example.com"
-              value={config.content.url}
-              onChange={(e) => handleContentChange("url", e.target.value)}
-              className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow"
-            />
-          </div>
+          <input 
+            type="url"
+            placeholder="https://example.com"
+            value={config.content.url}
+            onChange={(e) => handleContentChange("url", e.target.value)}
+            className="w-full bg-surface-container border border-outline/20 rounded-xl px-4 py-4 focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all text-on-surface placeholder-slate-600 font-medium font-inter"
+          />
         )}
 
         {config.category === "text" && (
-          <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">Plain Text</label>
-            <textarea 
-              placeholder="Enter any text here..."
-              value={config.content.text}
-              onChange={(e) => handleContentChange("text", e.target.value)}
-              rows={4}
-              className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow"
-            />
-          </div>
+          <textarea 
+            placeholder="Enter your message here..."
+            value={config.content.text}
+            onChange={(e) => handleContentChange("text", e.target.value)}
+            rows={4}
+            className="w-full bg-surface-container border border-outline/20 rounded-xl px-4 py-4 focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all text-on-surface placeholder-slate-600 font-medium font-inter resize-none"
+          />
         )}
 
         {config.category === "wifi" && (
-          <div className="grid grid-cols-2 gap-4">
-            <div className="col-span-2">
-              <label className="block text-sm font-medium text-slate-700 mb-2">Network Name (SSID)</label>
+          <div className="space-y-4">
+            <input 
+              type="text"
+              placeholder="My WiFi Network"
+              value={config.content.wifi.ssid}
+              onChange={(e) => handleContentChange("ssid", e.target.value)}
+              className="w-full bg-surface-container border border-outline/20 rounded-xl px-4 py-4 focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all text-on-surface placeholder-slate-600 font-medium font-inter"
+            />
+            <div className="grid grid-cols-2 gap-4">
               <input 
                 type="text"
-                placeholder="My WiFi Network"
-                value={config.content.wifi.ssid}
-                onChange={(e) => handleContentChange("ssid", e.target.value)}
-                className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">Password</label>
-              <input 
-                type="text"
-                placeholder="Secret123"
+                placeholder="Password"
                 value={config.content.wifi.password}
                 onChange={(e) => handleContentChange("password", e.target.value)}
-                className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow"
+                className="w-full bg-surface-container border border-outline/20 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all text-on-surface placeholder-slate-600 font-medium font-inter"
               />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">Security</label>
               <select 
                 value={config.content.wifi.encryption}
                 onChange={(e) => handleContentChange("encryption", e.target.value)}
-                className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow appearance-none"
+                className="w-full bg-surface-container border border-outline/20 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all text-on-surface font-medium font-inter"
               >
-                <option value="WPA">WPA/WPA2/WPA3</option>
+                <option value="WPA">WPA/WPA2</option>
                 <option value="WEP">WEP</option>
                 <option value="nopass">None</option>
               </select>

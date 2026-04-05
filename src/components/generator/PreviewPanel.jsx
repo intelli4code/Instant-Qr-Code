@@ -1,12 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import QRCodeStyling from "qr-code-styling";
-import { Download, Loader2 } from "lucide-react";
 
 export default function PreviewPanel({ debouncedConfig, isGenerating }) {
   const ref = useRef(null);
   const qrCode = useRef(null);
 
-  // Helper to compile the string data based on category
   const getDataString = (config) => {
     if (config.category === "url") return config.content.url || "https://example.com";
     if (config.category === "text") return config.content.text || "Hello World";
@@ -19,36 +17,35 @@ export default function PreviewPanel({ debouncedConfig, isGenerating }) {
   };
 
   useEffect(() => {
-    // Determine the data string
     const data = getDataString(debouncedConfig);
-
-    // Styling configuration
     const options = {
-      width: 300,
-      height: 300,
+      width: 200,
+      height: 200,
       type: "svg",
       data: data,
       dotsOptions: {
         color: debouncedConfig.design.fgColor,
-        type: debouncedConfig.design.pattern, // squares, dots, rounded
+        type: debouncedConfig.design.pattern === "squares" ? "square" : debouncedConfig.design.pattern === "dots" ? "dots" : "rounded",
       },
       backgroundOptions: {
         color: debouncedConfig.design.bgColor,
       },
-      imageOptions: {
-        crossOrigin: "anonymous",
-        margin: 10
+      cornersSquareOptions: {
+        type: debouncedConfig.design.pattern === "squares" ? "square" : debouncedConfig.design.pattern === "dots" ? "dot" : "extra-rounded",
+        color: debouncedConfig.design.fgColor,
+      },
+      cornersDotOptions: {
+        type: debouncedConfig.design.pattern === "squares" ? "square" : debouncedConfig.design.pattern === "dots" ? "dot" : "extra-rounded",
+        color: debouncedConfig.design.fgColor,
       }
     };
 
     if (!qrCode.current) {
-      // First time initialization
       qrCode.current = new QRCodeStyling(options);
       if (ref.current) {
         qrCode.current.append(ref.current);
       }
     } else {
-      // Update existing instance
       qrCode.current.update(options);
     }
   }, [debouncedConfig]);
@@ -59,36 +56,43 @@ export default function PreviewPanel({ debouncedConfig, isGenerating }) {
   };
 
   return (
-    <div className="sticky top-6 flex flex-col items-center p-2">
-      <div className="relative w-full aspect-square max-w-[320px] bg-slate-50 border border-slate-200 rounded-3xl shadow-inner flex items-center justify-center p-8 mb-6">
+    <div className="flex flex-col items-center w-full">
+      <div className="relative group mb-8">
+        {/* Glow effect from design ref */}
+        <div className="absolute -inset-4 bg-primary/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-2xl shadow-primary/30" />
         
-        {/* Loading Overlay */}
-        {isGenerating && (
-          <div className="absolute inset-0 bg-white/80 backdrop-blur-sm rounded-3xl flex flex-col items-center justify-center z-10 transition-all duration-300">
-            <Loader2 className="w-10 h-10 text-blue-500 animate-spin mb-3" />
-            <span className="text-sm font-semibold text-slate-600 tracking-wide">Generating...</span>
-          </div>
-        )}
-
-        {/* The DOM element where qr-code-styling appends the canvas/svg */}
-        <div ref={ref} className="w-full h-full flex items-center justify-center pointer-events-none" />
-        
+        <div className="relative bg-white p-6 rounded-2xl shadow-inner border border-white/5 transition-all group-hover:scale-[1.02]">
+          {/* SVG/Canvas Container */}
+          <div ref={ref} className="w-48 h-48 flex items-center justify-center p-2" />
+          
+          {/* Loading ring from Designref */}
+          {isGenerating && (
+            <div className="absolute inset-0 flex items-center justify-center bg-white/80 rounded-2xl transition-all duration-300 z-10">
+              <div className="w-10 h-10 border-4 border-primary/30 border-t-primary rounded-full animate-spin shadow-lg shadow-primary/10"></div>
+            </div>
+          )}
+        </div>
       </div>
 
-      <div className="flex gap-3 w-full max-w-[320px]">
-        <button 
+      <div className="flex flex-col gap-3 w-full max-w-[280px]">
+        <button
           onClick={() => handleDownload("png")}
-          className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-xl shadow-lg shadow-blue-500/30 flex items-center justify-center gap-2 transition-all active:scale-95"
+          className="w-full bg-[#3b82f6] hover:bg-blue-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-blue-500/30 transition-all flex items-center justify-center gap-2 active:scale-95 group focus:ring-4 focus:ring-blue-500/20"
         >
-          <Download className="w-5 h-5" /> PNG
+          <span className="material-symbols-outlined text-xl group-hover:animate-bounce">download</span>
+          Download PNG
         </button>
-        <button 
+        <button
           onClick={() => handleDownload("svg")}
-          className="flex-1 bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 px-4 rounded-xl shadow-lg shadow-slate-900/20 flex items-center justify-center gap-2 transition-all active:scale-95"
+          className="w-full bg-slate-900 border border-sky-400/10 hover:bg-slate-950 text-slate-300 font-bold py-3 rounded-xl transition-all flex items-center justify-center gap-2 active:scale-95 text-xs uppercase tracking-widest"
         >
-          <Download className="w-5 h-5" /> SVG
+          Get SVG Vector
         </button>
       </div>
+      
+      <p className="mt-4 text-[10px] uppercase tracking-[0.2em] font-bold text-on-surface-variant/40 text-center animate-pulse">
+        Ready for high-res print
+      </p>
     </div>
   );
 }
