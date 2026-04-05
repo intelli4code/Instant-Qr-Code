@@ -1,37 +1,27 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
-import AdPlaceholder from "./components/layout/AdPlaceholder";
-import HeroGenerator from "./components/sections/HeroGenerator";
-import HowItWorks from "./components/sections/HowItWorks";
-import FAQ from "./components/sections/FAQ";
-import GeneratorWidget from "./components/generator/GeneratorWidget";
+import Home from "./pages/Home";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
+import License from "./pages/License";
 
 function App() {
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      
-      <main>
-        {/* Hero & Generator */}
-        <HeroGenerator>
-          <GeneratorWidget />
-        </HeroGenerator>
+    <Router>
+      <div className="min-h-screen bg-background">
+        <Navbar />
         
-        {/* Top Ad Slot */}
-        <AdPlaceholder className="!my-0 !border-t-0" />
-        
-        {/* Simple Steps Section */}
-        <HowItWorks />
-        
-        {/* FAQ Section */}
-        <FAQ />
-        
-        {/* Bottom Ad Slot */}
-        <AdPlaceholder className="!my-0 border-b-0" />
-      </main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/license" element={<License />} />
+        </Routes>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
