@@ -4,10 +4,17 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
         <div className="flex flex-col items-center md:items-start gap-2">
           <div className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-sky-300 text-lg">qr_code_2</span>
-            <span className="text-lg font-semibold text-white">Instant QR</span>
+            <span className="material-symbols-outlined text-primary text-xl">qr_code_2</span>
+            <span className="text-lg font-bold text-white uppercase tracking-tighter">
+              Instant <span className="text-primary italic">QR</span>
+            </span>
           </div>
-          <p className="text-slate-500 text-xs tracking-wide">Built by Hamza's Digital Studio</p>
+          <p className="text-slate-500 text-xs tracking-wide">
+            Designed and Developed By <span className="text-primary font-bold">Hamza Munir</span>
+          </p>
+          <p className="text-slate-600 text-[10px] font-bold tracking-[0.2em] uppercase mt-1">
+            IG HANDLE <a href="https://instagram.com/i_am_hamza_3" target="_blank" className="text-sky-400 hover:underline">@i_am_hamza_3</a>
+          </p>
         </div>
         <div className="flex gap-8">
           <a className="text-slate-500 hover:text-sky-300 transition-colors cursor-pointer font-medium" href="#">Privacy Policy</a>

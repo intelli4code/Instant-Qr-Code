@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Instant QR - Free &amp; Instant QR Code Generator</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#0e4d6e",
+                        "outline": "#4a6070",
+                        "surface-variant": "#1a2438",
+                        "on-tertiary": "#1a002e",
+                        "tertiary-container": "#3d2060",
+                        "secondary-fixed": "#c0d8e8",
+                        "primary-fixed-dim": "#7dd3fc",
+                        "tertiary-fixed": "#e8d0ff",
+                        "on-secondary-fixed": "#0d1f2b",
+                        "on-primary-fixed": "#001f2e",
+                        "on-tertiary-container": "#e8d0ff",
+                        "secondary-container": "#1a3a4e",
+                        "on-tertiary-fixed-variant": "#4d2a73",
+                        "on-tertiary-fixed": "#1a002e",
+                        "on-surface": "#e0e8f0",
+                        "inverse-primary": "#0a4c6e",
+                        "on-primary-fixed-variant": "#004d73",
+                        "background": "#0a0e1a",
+                        "surface-container-lowest": "#0a0e1a",
+                        "primary": "#7dd3fc",
+                        "error-container": "#3d1414",
+                        "surface-bright": "#1a2438",
+                        "surface": "#0f1524",
+                        "on-error": "#1a0000",
+                        "on-secondary-fixed-variant": "#2a4a5e",
+                        "on-secondary-container": "#c0d8e8",
+                        "surface-tint": "#7dd3fc",
+                        "surface-container": "#141c2e",
+                        "inverse-on-surface": "#0a0e1a",
+                        "tertiary-fixed-dim": "#c8a0f0",
+                        "on-primary-container": "#c8eaff",
+                        "inverse-surface": "#e0e8f0",
+                        "surface-dim": "#0f1524",
+                        "error": "#ff6b6b",
+                        "surface-container-low": "#111828",
+                        "secondary-fixed-dim": "#88b4cc",
+                        "on-error-container": "#ffb3b3",
+                        "on-background": "#e0e8f0",
+                        "surface-container-highest": "#202c42",
+                        "secondary": "#88b4cc",
+                        "on-secondary": "#001f2e",
+                        "outline-variant": "#2a3a48",
+                        "tertiary": "#c8a0f0",
+                        "primary-fixed": "#c8eaff",
+                        "on-surface-variant": "#a0b4c4",
+                        "on-primary": "#001f2e",
+                        "surface-container-high": "#1a2438"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .glass-card {
+            background: rgba(15, 21, 36, 0.6);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(125, 211, 252, 0.1);
+        }
+
+        .glass-card-elevated {
+            background: rgba(15, 21, 36, 0.75);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(125, 211, 252, 0.15);
+        }
+
+        .text-glow {
+            text-shadow: 0 0 20px rgba(125, 211, 252, 0.3);
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-background font-body selection:bg-primary/30">
+    <!-- Top Navigation Bar -->
+    <nav
+        class="bg-slate-950/60 backdrop-blur-xl border-b border-sky-400/10 shadow-2xl shadow-sky-900/20 font-inter antialiased docked full-width top-0 sticky z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center w-full px-6 py-4">
+            <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-sky-300" data-icon="qr_code_2">qr_code_2</span>
+                <span class="text-xl font-bold tracking-tight text-white">Instant QR</span>
+            </div>
+            <div class="hidden md:flex items-center gap-8">
+                <a class="text-sky-300 font-semibold border-b-2 border-sky-400 pb-1" href="#">Features</a>
+                <a class="text-slate-300 hover:text-white transition-colors" href="#">How it Works</a>
+                <a class="text-slate-300 hover:text-white transition-colors" href="#">FAQ</a>
+            </div>
+            <button
+                class="bg-primary hover:bg-sky-400 text-on-primary font-semibold px-6 py-2 rounded-full transition-all active:scale-95">
+                Get Started
+            </button>
+        </div>
+    </nav>
+    <!-- Hero & Generator Section -->
+    <header class="relative pt-20 pb-32 overflow-hidden">
+        <!-- Ambient background glow -->
+        <div
+            class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-sky-900/20 via-background to-transparent -z-10">
+        </div>
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-white mb-6 text-glow">
+                Free &amp; Instant <span class="text-primary">QR Code</span> Generator
+            </h1>
+            <p class="text-xl text-on-surface-variant max-w-2xl mx-auto mb-16">
+                No sign-up. No tracking. Just type, pause, and download.
+            </p>
+            <!-- Generator Widget -->
+            <div
+                class="max-w-4xl mx-auto glass-card-elevated rounded-2xl shadow-2xl flex flex-col md:grid md:grid-cols-12 overflow-hidden text-left border-sky-400/20">
+                <!-- Left Column: Settings -->
+                <div class="md:col-span-7 p-8 border-b md:border-b-0 md:border-r border-sky-400/10">
+                    <div class="flex gap-4 mb-8">
+                        <button
+                            class="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 text-primary border border-primary/20 font-medium">
+                            <span class="material-symbols-outlined text-sm" data-icon="link">link</span>
+                            Content
+                        </button>
+                        <button
+                            class="flex items-center gap-2 px-4 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors font-medium">
+                            <span class="material-symbols-outlined text-sm" data-icon="palette">palette</span>
+                            Design
+                        </button>
+                    </div>
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-on-surface-variant mb-2">Target URL or
+                                Text</label>
+                            <input
+                                class="w-full bg-surface-container border border-outline/20 rounded-xl px-4 py-4 focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all text-on-surface"
+                                placeholder="https://example.com" type="text" />
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-on-surface-variant mb-2">QR Color</label>
+                                <div class="flex gap-2">
+                                    <div class="w-8 h-8 rounded-full bg-white ring-2 ring-primary cursor-pointer"></div>
+                                    <div class="w-8 h-8 rounded-full bg-sky-400 cursor-pointer"></div>
+                                    <div class="w-8 h-8 rounded-full bg-tertiary cursor-pointer"></div>
+                                    <div
+                                        class="w-8 h-8 rounded-full border border-outline/20 cursor-pointer flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-xs" data-icon="add">add</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-on-surface-variant mb-2">Corners</label>
+                                <div class="flex gap-2">
+                                    <div
+                                        class="w-8 h-8 rounded bg-surface-variant border border-outline/20 cursor-pointer">
+                                    </div>
+                                    <div
+                                        class="w-8 h-8 rounded-md bg-surface-variant border border-outline/20 cursor-pointer">
+                                    </div>
+                                    <div
+                                        class="w-8 h-8 rounded-full bg-surface-variant border border-outline/20 cursor-pointer">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Right Column: Preview -->
+                <div class="md:col-span-5 p-8 flex flex-col items-center justify-center bg-surface-container-high/30">
+                    <div class="relative group">
+                        <div
+                            class="absolute -inset-4 bg-primary/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="relative bg-white p-6 rounded-xl shadow-inner mb-8">
+                            <img alt="Instant QR Code Preview" class="w-48 h-48"
+                                data-alt="a crisp black and white minimalist QR code centered on a clean white paper texture with soft studio lighting"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuASFC4fW8Av6DjNjeO1eV2dMnlsExxv1Ir54V5cGQQZk3W1f8PaV42r65wzQyeHwIefMuTORM0R97s85Ar0MdAGh1pf0xg6ZVID8XOIYDyQsiQhNS1sFqioSeQN9euSWL5AfPe8sko712Utq-NmLNT3vfYM1VAedkJU-hJTQAoIj_X_C5LV7RkWUpi8K1DHjS15ChhXVEMn9eW9RDSc_-CZms-zrfdEzjA1pgrP1hQgG0DPEI0FW-zdm6rLSc7PDEdNaM-xVjhnty8" />
+                            <!-- Loading ring animation (simulated) -->
+                            <div
+                                class="absolute inset-0 flex items-center justify-center bg-white/80 rounded-xl opacity-0">
+                                <div
+                                    class="w-10 h-10 border-4 border-primary/30 border-t-primary rounded-full animate-spin">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button
+                        class="w-full bg-[#3b82f6] hover:bg-blue-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-blue-500/30 transition-all flex items-center justify-center gap-2 active:scale-95">
+                        <span class="material-symbols-outlined" data-icon="download">download</span>
+                        Download QR Code
+                    </button>
+                    <p class="mt-4 text-xs text-on-surface-variant text-center">High-resolution PNG &amp; SVG available
+                    </p>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- How It Works Section -->
+    <section class="bg-white py-32 text-slate-900">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Simple as 1-2-3</h2>
+                <p class="text-slate-500">The fastest way to generate secure codes without the fluff.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-12">
+                <div class="text-center group">
+                    <div
+                        class="w-20 h-20 bg-sky-50 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined text-3xl text-sky-600"
+                            data-icon="edit_note">edit_note</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">1. Enter Content</h3>
+                    <p class="text-slate-500 leading-relaxed">Paste your link, Wi-Fi password, or business details into
+                        the input field.</p>
+                </div>
+                <div class="text-center group">
+                    <div
+                        class="w-20 h-20 bg-sky-50 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined text-3xl text-sky-600" data-icon="timer">timer</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">2. Wait 2 Seconds</h3>
+                    <p class="text-slate-500 leading-relaxed">Our engine generates your unique, secure QR code in
+                        real-time as you type.</p>
+                </div>
+                <div class="text-center group">
+                    <div
+                        class="w-20 h-20 bg-sky-50 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined text-3xl text-sky-600"
+                            data-icon="download_done">download_done</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">3. Download</h3>
+                    <p class="text-slate-500 leading-relaxed">Instantly save your high-quality file for print or digital
+                        use with one click.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- FAQ Section -->
+    <section class="bg-slate-50 py-32 text-slate-900 border-t border-slate-200">
+        <div class="max-w-3xl mx-auto px-6">
+            <h2 class="text-3xl font-extrabold mb-12 text-center">Frequently Asked Questions</h2>
+            <div class="space-y-4">
+                <div
+                    class="bg-white rounded-xl border border-slate-200 p-6 cursor-pointer hover:border-sky-300 transition-colors">
+                    <div class="flex justify-between items-center">
+                        <span class="font-semibold">Are the QR codes permanent?</span>
+                        <span class="material-symbols-outlined text-slate-400"
+                            data-icon="expand_more">expand_more</span>
+                    </div>
+                    <p class="mt-4 text-slate-500 hidden">Yes, all codes generated are static and will never expire.
+                        They link directly to your content.</p>
+                </div>
+                <div
+                    class="bg-white rounded-xl border border-slate-200 p-6 cursor-pointer hover:border-sky-300 transition-colors">
+                    <div class="flex justify-between items-center">
+                        <span class="font-semibold">Do you track who scans the codes?</span>
+                        <span class="material-symbols-outlined text-slate-400"
+                            data-icon="expand_more">expand_more</span>
+                    </div>
+                </div>
+                <div
+                    class="bg-white rounded-xl border border-slate-200 p-6 cursor-pointer hover:border-sky-300 transition-colors">
+                    <div class="flex justify-between items-center">
+                        <span class="font-semibold">Can I use these for commercial purposes?</span>
+                        <span class="material-symbols-outlined text-slate-400"
+                            data-icon="expand_more">expand_more</span>
+                    </div>
+                </div>
+                <div
+                    class="bg-white rounded-xl border border-slate-200 p-6 cursor-pointer hover:border-sky-300 transition-colors">
+                    <div class="flex justify-between items-center">
+                        <span class="font-semibold">Is there a limit to how many I can make?</span>
+                        <span class="material-symbols-outlined text-slate-400"
+                            data-icon="expand_more">expand_more</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer Section -->
+    <footer class="bg-slate-950 border-t border-sky-400/10 py-12 px-6 font-inter text-sm text-slate-400">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex flex-col items-center md:items-start gap-2">
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-sky-300 text-lg" data-icon="qr_code_2">qr_code_2</span>
+                    <span class="text-lg font-semibold text-white">Instant QR</span>
+                </div>
+                <p class="text-slate-500">Built by Hamza's Digital Studio</p>
+            </div>
+            <div class="flex gap-8">
+                <a class="text-slate-500 hover:text-sky-300 transition-colors cursor-pointer" href="#">Privacy
+                    Policy</a>
+                <a class="text-slate-500 hover:text-sky-300 transition-colors cursor-pointer" href="#">Terms of
+                    Service</a>
+                <a class="text-slate-500 hover:text-sky-300 transition-colors cursor-pointer" href="#">Contact</a>
+            </div>
+            <div class="flex gap-4">
+                <a class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center hover:bg-primary/20 transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined text-lg" data-icon="public">public</span>
+                </a>
+                <a class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center hover:bg-primary/20 transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined text-lg" data-icon="share">share</span>
+                </a>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-white/5 text-center text-slate-600 text-xs">
+            © 2024 Instant QR Generator. No cookies used. Your privacy is prioritized.
+        </div>
+    </footer>
+</body>
+
+</html>
