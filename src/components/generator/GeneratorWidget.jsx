@@ -11,7 +11,23 @@ export default function GeneratorWidget() {
     content: {
       url: "https://example.com",
       text: "",
-      wifi: { ssid: "", password: "", encryption: "WPA" }
+      wifi: { ssid: "", password: "", encryption: "WPA" },
+      vcard: {
+        firstName: "",
+        lastName: "",
+        phone: "",
+        email: "",
+        company: "",
+        title: "",
+        workPhone: "",
+        fax: "",
+        street: "",
+        city: "",
+        state: "",
+        country: "",
+        zip: "",
+        website: ""
+      }
     },
     design: {
       fgColor: "#000000",
