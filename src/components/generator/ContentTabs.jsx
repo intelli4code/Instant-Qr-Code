@@ -37,58 +37,85 @@ export default function ContentTabs({ config, setConfig }) {
         ))}
       </div>
 
-      <div className="pr-2 custom-scrollbar min-h-[500px] flex flex-col justify-center">
-        <label className="block text-sm font-medium text-on-surface-variant mb-3 uppercase tracking-widest text-[10px]">
+      <div className="pr-2 custom-scrollbar min-h-[500px] flex flex-col justify-start pt-2">
+        <label className="block text-sm font-medium text-on-surface-variant mb-6 uppercase tracking-widest text-[10px] opacity-50">
           {config.category === "vcard" ? "Business Card Details" : "Content Information"}
         </label>
         
-        <div className="w-full">
+        <div className="w-full max-w-xl">
           {config.category === "url" && (
-            <input 
-              type="url"
-              placeholder="https://example.com"
-              value={config.content.url}
-              onChange={(e) => handleContentChange("url", e.target.value)}
-              className="w-full bg-surface-container border border-outline/20 rounded-xl px-4 py-4 focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all text-on-surface placeholder-slate-600 font-medium font-inter"
-            />
+            <div className="space-y-6">
+              <input 
+                type="url"
+                placeholder="https://example.com"
+                value={config.content.url}
+                onChange={(e) => handleContentChange("url", e.target.value)}
+                className="w-full bg-surface-container border border-outline/20 rounded-xl px-4 py-4 focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all text-on-surface placeholder-slate-600 font-medium font-inter"
+              />
+              {/* Pro Tip */}
+              <div className="bg-primary/5 border border-primary/10 rounded-xl p-4 flex gap-3">
+                <span className="material-symbols-outlined text-primary text-sm">lightbulb</span>
+                <p className="text-[10px] text-on-surface-variant leading-relaxed">
+                  <span className="text-primary font-bold">Pro Tip:</span> Shorten long URLs using a service like bit.ly for a simpler, faster-to-scan QR code pattern.
+                </p>
+              </div>
+            </div>
           )}
 
           {config.category === "text" && (
-            <textarea 
-              placeholder="Enter your message here..."
-              value={config.content.text}
-              onChange={(e) => handleContentChange("text", e.target.value)}
-              rows={4}
-              className="w-full bg-surface-container border border-outline/20 rounded-xl px-4 py-4 focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all text-on-surface placeholder-slate-600 font-medium font-inter resize-none"
-            />
+            <div className="space-y-6">
+              <textarea 
+                placeholder="Enter your message here..."
+                value={config.content.text}
+                onChange={(e) => handleContentChange("text", e.target.value)}
+                rows={6}
+                className="w-full bg-surface-container border border-outline/20 rounded-xl px-4 py-4 focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all text-on-surface placeholder-slate-600 font-medium font-inter resize-none"
+              />
+              {/* Pro Tip */}
+              <div className="bg-primary/5 border border-primary/10 rounded-xl p-4 flex gap-3">
+                <span className="material-symbols-outlined text-primary text-sm">info</span>
+                <p className="text-[10px] text-on-surface-variant leading-relaxed">
+                  <span className="text-primary font-bold">Did you know?</span> Static QR codes can store up to 4,296 characters, but keeping your text under 300 characters ensures maximum readability on all devices.
+                </p>
+              </div>
+            </div>
           )}
 
           {config.category === "wifi" && (
-            <div className="space-y-4">
-              <input 
-                type="text"
-                placeholder="My WiFi Network"
-                value={config.content.wifi.ssid}
-                onChange={(e) => handleContentChange("ssid", e.target.value)}
-                className="w-full bg-surface-container border border-outline/20 rounded-xl px-4 py-4 focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all text-on-surface placeholder-slate-600 font-medium font-inter"
-              />
-              <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-6">
+              <div className="space-y-4">
                 <input 
                   type="text"
-                  placeholder="Password"
-                  value={config.content.wifi.password}
-                  onChange={(e) => handleContentChange("password", e.target.value)}
-                  className="w-full bg-surface-container border border-outline/20 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all text-on-surface placeholder-slate-600 font-medium font-inter"
+                  placeholder="My WiFi Network"
+                  value={config.content.wifi.ssid}
+                  onChange={(e) => handleContentChange("ssid", e.target.value)}
+                  className="w-full bg-surface-container border border-outline/20 rounded-xl px-4 py-4 focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all text-on-surface placeholder-slate-600 font-medium font-inter"
                 />
-                <select 
-                  value={config.content.wifi.encryption}
-                  onChange={(e) => handleContentChange("encryption", e.target.value)}
-                  className="w-full bg-surface-container border border-outline/20 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all text-on-surface font-medium font-inter"
-                >
-                  <option value="WPA">WPA/WPA2</option>
-                  <option value="WEP">WEP</option>
-                  <option value="nopass">None</option>
-                </select>
+                <div className="grid grid-cols-2 gap-4">
+                  <input 
+                    type="text"
+                    placeholder="Password"
+                    value={config.content.wifi.password}
+                    onChange={(e) => handleContentChange("password", e.target.value)}
+                    className="w-full bg-surface-container border border-outline/20 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all text-on-surface placeholder-slate-600 font-medium font-inter"
+                  />
+                  <select 
+                    value={config.content.wifi.encryption}
+                    onChange={(e) => handleContentChange("encryption", e.target.value)}
+                    className="w-full bg-surface-container border border-outline/20 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all text-on-surface font-medium font-inter"
+                  >
+                    <option value="WPA">WPA/WPA2</option>
+                    <option value="WEP">WEP</option>
+                    <option value="nopass">None</option>
+                  </select>
+                </div>
+              </div>
+              {/* Pro Tip */}
+              <div className="bg-primary/5 border border-primary/10 rounded-xl p-4 flex gap-3">
+                <span className="material-symbols-outlined text-primary text-sm">wifi_protected_setup</span>
+                <p className="text-[10px] text-on-surface-variant leading-relaxed">
+                  Print this QR code and place it in your guest room or office to let users connect instantly without manually typing long passwords.
+                </p>
               </div>
             </div>
           )}
