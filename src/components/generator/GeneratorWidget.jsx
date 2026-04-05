@@ -5,11 +5,10 @@ import { useHistoryState } from "../../context/HistoryContext";
 import ContentTabs from "./ContentTabs";
 import DesignTabs from "./DesignTabs";
 import PreviewPanel from "./PreviewPanel";
-import HistoryDrawer from "./HistoryDrawer";
 
 export default function GeneratorWidget() {
   const [activeTab, setActiveTab] = useState("content"); // content, design
-  const { isHistoryOpen, setIsHistoryOpen } = useHistoryState();
+  const { selectedItem, setSelectedItem } = useHistoryState();
   const [history, setHistory] = useLocalStorage("qr_history", []);
   
   const [config, setConfig] = useState({
@@ -48,6 +47,14 @@ export default function GeneratorWidget() {
   const [isGenerating, setIsGenerating] = useState(false);
   const debouncedConfig = useDebounce(config, 2000);
 
+  // Sync with selected history item
+  useEffect(() => {
+    if (selectedItem) {
+      setConfig(selectedItem);
+      setSelectedItem(null); // Clear after applying
+    }
+  }, [selectedItem, setSelectedItem]);
+
   useEffect(() => {
     setIsGenerating(true);
   }, [config]);
@@ -56,13 +63,10 @@ export default function GeneratorWidget() {
     setIsGenerating(false);
     
     // Save to history when a new config is successfully debounced
-    // We only save if it's different from the last history item
     if (debouncedConfig) {
       setHistory(prev => {
         const lastItem = prev[0];
-        // Simple stringify check for deep equality
         if (JSON.stringify(lastItem) === JSON.stringify(debouncedConfig)) return prev;
-        
         const newHistory = [debouncedConfig, ...prev].slice(0, 10);
         return newHistory;
       });

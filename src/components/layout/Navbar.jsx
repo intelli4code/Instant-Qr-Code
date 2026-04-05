@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { useHistoryState } from "../../context/HistoryContext";
 import { useTheme } from "../../context/ThemeContext";
 

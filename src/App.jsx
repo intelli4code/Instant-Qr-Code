@@ -10,6 +10,8 @@ import ScrollToHash from "./components/utils/ScrollToHash";
 import { HistoryProvider } from "./context/HistoryContext";
 import { ThemeProvider } from "./context/ThemeContext";
 
+import HistoryDrawer from "./components/generator/HistoryDrawer";
+
 export default function App() {
   return (
     <Router>
@@ -27,8 +29,9 @@ export default function App() {
               <Route path="/license" element={<License />} />
             </Routes>
 
-          <Footer />
-        </div>
+            <HistoryDrawer />
+            <Footer />
+          </div>
         </HistoryProvider>
       </ThemeProvider>
     </Router>
