@@ -5,6 +5,7 @@ import HeroGenerator from "./components/sections/HeroGenerator";
 import HowItWorks from "./components/sections/HowItWorks";
 import FeaturesGrid from "./components/sections/FeaturesGrid";
 import FAQ from "./components/sections/FAQ";
+import GeneratorWidget from "./components/generator/GeneratorWidget";
 
 function App() {
   return (
@@ -12,10 +13,7 @@ function App() {
       <Navbar />
       <main>
         <HeroGenerator>
-          {/* We will inject GeneratorWidget here in Phase 3/4/5 */}
-          <div className="w-full h-64 bg-slate-800/50 backdrop-blur-md rounded-2xl border border-slate-700 flex items-center justify-center text-slate-400">
-            [Generator Widget Placeholder]
-          </div>
+          <GeneratorWidget />
         </HeroGenerator>
         
         <AdPlaceholder className="!my-0 !border-t-0" />
