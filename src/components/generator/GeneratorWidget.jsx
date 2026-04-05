@@ -1,11 +1,17 @@
 import { useState, useEffect } from "react";
 import { useDebounce } from "../../hooks/useDebounce";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { useHistoryState } from "../../context/HistoryContext";
 import ContentTabs from "./ContentTabs";
 import DesignTabs from "./DesignTabs";
 import PreviewPanel from "./PreviewPanel";
+import HistoryDrawer from "./HistoryDrawer";
 
 export default function GeneratorWidget() {
   const [activeTab, setActiveTab] = useState("content"); // content, design
+  const { isHistoryOpen, setIsHistoryOpen } = useHistoryState();
+  const [history, setHistory] = useLocalStorage("qr_history", []);
+  
   const [config, setConfig] = useState({
     category: "url",
     content: {
@@ -48,7 +54,20 @@ export default function GeneratorWidget() {
 
   useEffect(() => {
     setIsGenerating(false);
-  }, [debouncedConfig]);
+    
+    // Save to history when a new config is successfully debounced
+    // We only save if it's different from the last history item
+    if (debouncedConfig) {
+      setHistory(prev => {
+        const lastItem = prev[0];
+        // Simple stringify check for deep equality
+        if (JSON.stringify(lastItem) === JSON.stringify(debouncedConfig)) return prev;
+        
+        const newHistory = [debouncedConfig, ...prev].slice(0, 10);
+        return newHistory;
+      });
+    }
+  }, [debouncedConfig, setHistory]);
 
   return (
     <div className="w-full max-w-[1200px] lg:w-[75%] min-h-[700px] mx-auto glass-card-elevated rounded-2xl shadow-2xl flex flex-col md:grid md:grid-cols-12 overflow-hidden text-left border border-sky-400/20 transition-all duration-500">
