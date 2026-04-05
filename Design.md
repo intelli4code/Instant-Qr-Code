@@ -16,22 +16,26 @@ Please organize the components logically:
     /layout
       - Navbar.jsx (Logo left, simple transparent background over navy)
       - Footer.jsx (Dark background, simple links, branding)
+      - AdPlaceholder.jsx (Reusable responsive banner block)
     /sections
       - HeroGenerator.jsx (The deep navy section holding the main tool)
       - HowItWorks.jsx (3-step instructional section)
       - FeaturesGrid.jsx (Simple grid of use cases)
-      - FAQAccordion.jsx (Standard FAQ section for SEO)
+      - FAQ.jsx (Standard FAQ section for SEO)
     /generator (Core Tool - Must maintain previous logic)
-      - GeneratorLayout.jsx (The left/right split for inputs vs preview)
-      - ContentForm.jsx
-      - DesignForm.jsx
-      - QRPreview.jsx
+      - GeneratorWidget.jsx (The left/right split for inputs vs preview)
+      - ContentTabs.jsx
+      - DesignTabs.jsx
+      - PreviewPanel.jsx
   /hooks
     - useDebounce.js
+  /utils
+    - qrGenerator.js
   App.jsx
+  main.jsx
 
 ## 🧠 Core Generator Logic (CRITICAL)
-Do not lose the established logic for the `GeneratorLayout`:
+Do not lose the established logic for the `GeneratorWidget`:
 * **The 2-Second Hook:** We use a `useDebounce` hook. 
 * **Single Fields (Website, Text):** Trigger a 2-second loading ring on typing, then auto-generate.
 * **Multi-Fields (WiFi):** Only auto-generate when required fields are filled.
@@ -42,4 +46,8 @@ Do not lose the established logic for the `GeneratorLayout`:
 **1. Navbar (`<Navbar />`)**
 * Sits at the very top of the navy section. White text logo on the left.
 
-**
+**2. HeroGenerator (`<HeroGenerator />`)**
+* Contains the main `GeneratorWidget`.
+
+**3. Remaining Sections**
+* Alternating backgrounds for `HowItWorks`, `FeaturesGrid`, and `FAQ`.
