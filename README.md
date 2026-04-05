@@ -71,4 +71,4 @@
 ## 🤝 Contributing
 Contributions are welcome! If you have ideas for new features or sections, feel free to open a PR.
 
-Built with ❤️ by [Antigravity](https://github.com/intelli4code)
+Built with ❤️ by [Hamza Munir](https://github.com/intelli4code)
