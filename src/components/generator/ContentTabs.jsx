@@ -54,12 +54,12 @@ export default function ContentTabs({ config, setConfig }) {
                   value={config.content.url}
                   onChange={(e) => handleContentChange("url", e.target.value)}
                   className={`w-full bg-surface/40 border rounded-2xl px-6 py-5 focus:ring-4 outline-none transition-all text-on-surface placeholder-on-surface-variant/40 font-bold font-inter shadow-sm ${
-                    config.content.url && !/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/.test(config.content.url)
+                    config.content.url && !/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/.test(config.content.url)
                       ? "border-red-500/50 focus:ring-red-500/10 focus:border-red-500 shadow-[0_0_15px_rgba(239,68,68,0.1)]"
                       : "border-on-surface-variant/10 focus:ring-primary/10 focus:border-primary/50"
                   }`}
                 />
-                {config.content.url && !/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/.test(config.content.url) && (
+                {config.content.url && !/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/.test(config.content.url) && (
                   <motion.p 
                     initial={{ opacity: 0, y: -10 }} 
                     animate={{ opacity: 1, y: 0 }}

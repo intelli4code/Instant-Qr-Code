@@ -4,14 +4,13 @@ import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { useNavigate, useLocation } from "react-router-dom";
 
 export default function HistoryDrawer() {
-  const { isHistoryOpen, setIsHistoryOpen, setSelectedItem } = useHistoryState();
+  const { isHistoryOpen, setIsHistoryOpen, applyToGenerator } = useHistoryState();
   const [history, setHistory] = useLocalStorage("qr_history", []);
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleSelect = (item) => {
-    setSelectedItem(item);
-    setIsHistoryOpen(false);
+    applyToGenerator(item);
     if (location.pathname !== "/") {
       navigate("/");
     }

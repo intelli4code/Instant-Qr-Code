@@ -8,8 +8,8 @@ import PreviewPanel from "./PreviewPanel";
 
 export default function GeneratorWidget() {
   const [activeTab, setActiveTab] = useState("content"); // content, design
-  const { selectedItem, setSelectedItem } = useHistoryState();
-  const [history, setHistory] = useLocalStorage("qr_history", []);
+  const { appliedItem, setAppliedItem } = useHistoryState();
+  const [, setHistory] = useLocalStorage("qr_history", []);
   
   const [config, setConfig] = useState({
     category: "url",
@@ -44,24 +44,10 @@ export default function GeneratorWidget() {
     }
   });
 
-  const [isGenerating, setIsGenerating] = useState(false);
   const debouncedConfig = useDebounce(config, 400);
-
-  // Sync with selected history item
-  useEffect(() => {
-    if (selectedItem) {
-      setConfig(selectedItem);
-      setSelectedItem(null); // Clear after applying
-    }
-  }, [selectedItem, setSelectedItem]);
+  const isGenerating = config !== debouncedConfig;
 
   useEffect(() => {
-    setIsGenerating(true);
-  }, [config]);
-
-  useEffect(() => {
-    setIsGenerating(false);
-    
     // Save to history when a new config is successfully debounced
     if (debouncedConfig) {
       setHistory(prev => {
@@ -72,6 +58,17 @@ export default function GeneratorWidget() {
       });
     }
   }, [debouncedConfig, setHistory]);
+
+  // Sync with selected history item
+  useEffect(() => {
+    if (appliedItem) {
+      // Defer the setConfig to avoid synchronous cascading renders warning
+      queueMicrotask(() => {
+        setConfig(appliedItem);
+        setAppliedItem(null);
+      });
+    }
+  }, [appliedItem, setAppliedItem]);
 
   return (
     <div className="w-full max-w-[1200px] lg:w-[75%] min-h-0 mx-auto glass-card-elevated rounded-[2.5rem] shadow-2xl flex flex-col lg:grid lg:grid-cols-12 overflow-hidden text-left border border-white/5 dark:border-sky-400/10 transition-all duration-500">
