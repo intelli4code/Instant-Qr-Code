@@ -13,8 +13,24 @@ export default function HeroGenerator({ children }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="mb-12"
+          className="mb-8"
         >
+          {/* Main Visual Logo */}
+          <motion.div 
+            animate={{ 
+              scale: [1, 1.05, 1],
+              rotate: [0, 5, 0]
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="mb-8"
+          >
+            <span className="material-symbols-outlined text-primary text-7xl md:text-8xl drop-shadow-[0_0_30px_rgba(14,165,233,0.4)]">qr_code_2</span>
+          </motion.div>
+
           <div className="flex items-center justify-center gap-3 mb-6">
             <span className="h-px w-8 bg-primary/30"></span>
             <span className="text-primary font-black uppercase tracking-[0.4em] text-[10px] md:text-sm">Professional QR toolkit</span>

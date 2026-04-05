@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
         <div className="flex flex-col items-center md:items-start gap-4">
           <Link to="/" className="flex items-center gap-2 group">
-            <span className="material-symbols-outlined text-primary text-xl group-hover:rotate-12 transition-transform">qr_code_2</span>
+            <span className="material-symbols-outlined text-primary text-3xl group-hover:rotate-12 transition-transform drop-shadow-[0_0_10px_rgba(14,165,233,0.3)]">qr_code_2</span>
             <span className="text-lg font-black text-on-surface uppercase tracking-tighter">
               Instant <span className="text-primary italic">QR</span>
             </span>
