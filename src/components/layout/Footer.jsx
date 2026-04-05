@@ -1,38 +1,51 @@
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+
 export default function Footer() {
   return (
-    <footer className="bg-slate-950 border-t border-sky-400/10 py-12 px-6 font-inter text-sm text-slate-400 mt-20">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-        <div className="flex flex-col items-center md:items-start gap-2">
-          <div className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-primary text-xl">qr_code_2</span>
+    <footer className="bg-slate-950 border-t border-sky-400/5 pt-20 pb-10 px-6 font-inter antialiased">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
+        <div className="flex flex-col items-center md:items-start gap-4">
+          <Link to="/" className="flex items-center gap-2 group">
+            <span className="material-symbols-outlined text-primary text-xl group-hover:rotate-12 transition-transform">qr_code_2</span>
             <span className="text-lg font-bold text-white uppercase tracking-tighter">
               Instant <span className="text-primary italic">QR</span>
             </span>
+          </Link>
+          <div className="text-center md:text-left">
+            <p className="text-slate-500 text-xs tracking-wide">
+              Designed and Developed By <span className="text-primary font-bold">Hamza Munir</span>
+            </p>
+            <p className="text-slate-600 text-[10px] font-bold tracking-[0.2em] uppercase mt-2">
+              IG HANDLE <a href="https://instagram.com/i_am_hamza_3" target="_blank" className="text-sky-400 hover:underline">@i_am_hamza_3</a>
+            </p>
           </div>
-          <p className="text-slate-500 text-xs tracking-wide">
-            Designed and Developed By <span className="text-primary font-bold">Hamza Munir</span>
-          </p>
-          <p className="text-slate-600 text-[10px] font-bold tracking-[0.2em] uppercase mt-1">
-            IG HANDLE <a href="https://instagram.com/i_am_hamza_3" target="_blank" className="text-sky-400 hover:underline">@i_am_hamza_3</a>
-          </p>
         </div>
-        <div className="flex gap-8">
-          <a className="text-slate-500 hover:text-sky-300 transition-colors cursor-pointer font-medium" href="#">Privacy Policy</a>
-          <a className="text-slate-500 hover:text-sky-300 transition-colors cursor-pointer font-medium" href="#">Terms of Service</a>
-          <a className="text-slate-500 hover:text-sky-300 transition-colors cursor-pointer font-medium" href="#">Contact</a>
-        </div>
-        <div className="flex gap-4">
-          <a className="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center hover:bg-primary/20 transition-colors" href="#">
-            <span className="material-symbols-outlined text-lg">public</span>
-          </a>
-          <a className="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center hover:bg-primary/20 transition-colors" href="#">
-            <span className="material-symbols-outlined text-lg">share</span>
-          </a>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-12 text-center md:text-left">
+          <div className="flex flex-col gap-3">
+            <p className="text-white text-xs font-black uppercase tracking-widest mb-2">Legal</p>
+            <Link className="text-slate-500 hover:text-sky-300 transition-colors text-xs font-semibold" to="/terms">Terms of Service</Link>
+            <Link className="text-slate-500 hover:text-sky-300 transition-colors text-xs font-semibold" to="/privacy">Privacy Policy</Link>
+            <Link className="text-slate-500 hover:text-sky-300 transition-colors text-xs font-semibold" to="/license">License Agreement</Link>
+          </div>
+          <div className="flex flex-col gap-3">
+            <p className="text-white text-xs font-black uppercase tracking-widest mb-2">Social</p>
+            <a className="text-slate-500 hover:text-sky-300 transition-colors text-xs font-semibold" href="https://instagram.com/i_am_hamza_3" target="_blank">Instagram</a>
+            <a className="text-slate-500 hover:text-sky-300 transition-colors text-xs font-semibold" href="https://github.com/intelli4code" target="_blank">GitHub</a>
+          </div>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto mt-12 pt-8 border-t border-white/5 text-center text-slate-600 text-xs">
-        © {new Date().getFullYear()} Instant QR Generator. No cookies used. Your privacy is prioritized.
-      </div>
+
+      <motion.div 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        className="max-w-7xl mx-auto mt-20 pt-8 border-t border-white/5 text-center"
+      >
+        <p className="text-slate-700 text-[10px] font-bold uppercase tracking-[0.3em]">
+          &copy; {new Date().getFullYear()} Instant QR - Professional Generator Tool
+        </p>
+      </motion.div>
     </footer>
   );
 }
