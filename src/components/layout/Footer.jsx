@@ -24,6 +24,12 @@ export default function Footer() {
 
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-12 text-center md:text-left">
           <div className="flex flex-col gap-3">
+            <p className="text-white text-xs font-black uppercase tracking-widest mb-2">Platform</p>
+            <Link className="text-slate-500 hover:text-sky-300 transition-colors text-xs font-semibold" to="/#features">Features</Link>
+            <Link className="text-slate-500 hover:text-sky-300 transition-colors text-xs font-semibold" to="/#how-it-works">How It Works</Link>
+            <Link className="text-slate-500 hover:text-sky-300 transition-colors text-xs font-semibold" to="/#faq">FAQs</Link>
+          </div>
+          <div className="flex flex-col gap-3">
             <p className="text-white text-xs font-black uppercase tracking-widest mb-2">Legal</p>
             <Link className="text-slate-500 hover:text-sky-300 transition-colors text-xs font-semibold" to="/terms">Terms of Service</Link>
             <Link className="text-slate-500 hover:text-sky-300 transition-colors text-xs font-semibold" to="/privacy">Privacy Policy</Link>

@@ -34,6 +34,8 @@ export default function GeneratorWidget() {
       bgColor: "#ffffff",
       frame: "none",
       pattern: "squares", // squares, dots, rounded
+      logo: null,
+      logoSize: 0.2, // Default 20% of QR size
     }
   });
 

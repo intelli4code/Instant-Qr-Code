@@ -59,6 +59,12 @@ export default function PreviewPanel({ debouncedConfig, isGenerating }) {
       backgroundOptions: {
         color: debouncedConfig.design.bgColor,
       },
+      image: debouncedConfig.design.logo,
+      imageOptions: {
+        hideBackgroundDots: true,
+        imageSize: debouncedConfig.design.logoSize,
+        margin: 5,
+      },
       cornersSquareOptions: {
         type: debouncedConfig.design.pattern === "squares" ? "square" : debouncedConfig.design.pattern === "dots" ? "dot" : "extra-rounded",
         color: debouncedConfig.design.fgColor,

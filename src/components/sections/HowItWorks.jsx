@@ -8,7 +8,7 @@ export default function HowItWorks() {
   ];
 
   return (
-    <section className="py-24 bg-surface-container relative overflow-hidden">
+    <section id="how-it-works" className="py-24 bg-surface-container relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16 px-4">
           <motion.div 

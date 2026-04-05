@@ -5,11 +5,13 @@ import Home from "./pages/Home";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import License from "./pages/License";
+import ScrollToHash from "./components/utils/ScrollToHash";
 
-function App() {
+export default function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-background">
+      <ScrollToHash />
+      <div className="min-h-screen bg-background flex flex-col font-inter">
         <Navbar />
         
         <Routes>
@@ -24,5 +26,3 @@ function App() {
     </Router>
   );
 }
-
-export default App;

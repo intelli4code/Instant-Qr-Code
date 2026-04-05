@@ -20,21 +20,17 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-8">
           {[
             { name: "Features", path: "/#features" },
+            { name: "How It Works", path: "/#how-it-works" },
             { name: "FAQ", path: "/#faq" },
             { name: "Privacy", path: "/privacy" },
-            { name: "Terms", path: "/terms" }
           ].map((link, idx) => (
-            <NavLink 
+            <Link 
               key={idx}
               to={link.path}
-              className={({ isActive }) => 
-                `text-sm font-semibold transition-all hover:text-primary ${
-                  isActive && !link.path.includes("#") ? "text-primary text-glow" : "text-sky-300"
-                }`
-              }
+              className="text-sm font-semibold transition-all hover:text-primary text-sky-300"
             >
               {link.name}
-            </NavLink>
+            </Link>
           ))}
         </div>
 

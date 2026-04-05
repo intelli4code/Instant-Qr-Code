@@ -96,6 +96,59 @@ export default function DesignTabs({ config, setConfig }) {
           </div>
         </div>
 
+        {/* Logo Integration - NEW */}
+        <div className="pt-4 border-t border-sky-400/5">
+          <label className="block text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-4">
+            Center Logo (PNG/SVG)
+          </label>
+          
+          <div className="space-y-4">
+            {!config.design.logo ? (
+              <label className="flex flex-col items-center justify-center w-full h-24 border-2 border-dashed border-sky-400/10 rounded-xl cursor-pointer hover:border-primary/40 hover:bg-primary/5 transition-all group">
+                <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                  <span className="material-symbols-outlined text-primary/40 group-hover:text-primary transition-colors mb-2">add_photo_alternate</span>
+                  <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Click to Upload</p>
+                </div>
+                <input 
+                  type="file" 
+                  className="hidden" 
+                  accept="image/png, image/jpeg, image/svg+xml"
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onloadend = () => handleDesignChange("logo", reader.result);
+                      reader.readAsDataURL(file);
+                    }
+                  }}
+                />
+              </label>
+            ) : (
+              <div className="flex items-center gap-4 p-3 bg-surface-container rounded-xl border border-primary/20 animate-in fade-in zoom-in duration-300">
+                <img src={config.design.logo} alt="QR Logo" className="w-12 h-12 rounded-lg object-contain bg-white/5 p-1 border border-white/10" />
+                <div className="flex-1">
+                  <p className="text-[10px] text-white font-bold uppercase tracking-wider mb-2">Logo Size</p>
+                  <input 
+                    type="range"
+                    min="0.1"
+                    max="0.4"
+                    step="0.05"
+                    value={config.design.logoSize}
+                    onChange={(e) => handleDesignChange("logoSize", parseFloat(e.target.value))}
+                    className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-primary"
+                  />
+                </div>
+                <button 
+                  onClick={() => handleDesignChange("logo", null)}
+                  className="w-8 h-8 rounded-lg flex items-center justify-center text-red-400 hover:bg-red-500/10 transition-colors"
+                >
+                  <span className="material-symbols-outlined text-sm">delete</span>
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+
       </div>
 
       <div className="pt-4 border-t border-sky-400/5">
