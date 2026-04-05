@@ -13,7 +13,7 @@ export default function DesignTabs({ config, setConfig }) {
   const bgPresets = ["#ffffff", "#f8fafc", "#e2e8f0", "#0a0e1a", "#7dd3fc"];
 
   return (
-    <div className="space-y-8 animate-in fade-in slide-in-from-right-4 duration-500 overflow-y-auto max-h-[400px] pr-2 custom-scrollbar">
+    <div className="space-y-8 animate-in fade-in slide-in-from-right-4 duration-500 pr-2 custom-scrollbar">
       
       {/* Colors Section */}
       <div className="space-y-8">

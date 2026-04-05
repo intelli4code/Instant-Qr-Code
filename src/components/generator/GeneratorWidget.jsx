@@ -49,7 +49,7 @@ export default function GeneratorWidget() {
   }, [debouncedConfig]);
 
   return (
-    <div className="w-full max-w-7xl md:w-[70%] mx-auto glass-card-elevated rounded-2xl shadow-2xl flex flex-col md:grid md:grid-cols-12 overflow-hidden text-left border border-sky-400/20">
+    <div className="w-full max-w-[1200px] lg:w-[75%] min-h-[700px] mx-auto glass-card-elevated rounded-2xl shadow-2xl flex flex-col md:grid md:grid-cols-12 overflow-hidden text-left border border-sky-400/20 transition-all duration-500">
       
       {/* Left Column: Settings */}
       <div className="md:col-span-7 p-8 border-b md:border-b-0 md:border-r border-sky-400/10 bg-surface/40">

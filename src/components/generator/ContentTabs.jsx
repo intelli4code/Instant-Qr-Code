@@ -37,7 +37,7 @@ export default function ContentTabs({ config, setConfig }) {
         ))}
       </div>
 
-      <div className="max-h-[500px] overflow-y-auto pr-2 custom-scrollbar min-h-[300px] flex flex-col justify-center">
+      <div className="pr-2 custom-scrollbar min-h-[500px] flex flex-col justify-center">
         <label className="block text-sm font-medium text-on-surface-variant mb-3 uppercase tracking-widest text-[10px]">
           {config.category === "vcard" ? "Business Card Details" : "Content Information"}
         </label>
