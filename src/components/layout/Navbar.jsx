@@ -1,12 +1,20 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useHistoryState } from "../../context/HistoryContext";
 import { useTheme } from "../../context/ThemeContext";
 
 export default function Navbar() {
   const { setIsHistoryOpen } = useHistoryState();
   const { theme, toggleTheme } = useTheme();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const navLinks = [
+    { name: "Features", path: "/#features" },
+    { name: "FAQ", path: "/#faq" },
+    { name: "Bulk Mode", path: "/bulk" },
+    { name: "Privacy", path: "/privacy" },
+  ];
   return (
     <motion.nav 
       initial={{ y: -100 }}
@@ -23,12 +31,7 @@ export default function Navbar() {
         </Link>
         
         <div className="hidden lg:flex items-center gap-8">
-          {[
-            { name: "Features", path: "/#features" },
-            { name: "FAQ", path: "/#faq" },
-            { name: "Bulk Mode", path: "/bulk" },
-            { name: "Privacy", path: "/privacy" },
-          ].map((link, idx) => (
+          {navLinks.map((link, idx) => (
             <Link 
               key={idx}
               to={link.path}
@@ -52,17 +55,13 @@ export default function Navbar() {
 
           <button 
             onClick={() => setIsHistoryOpen(true)}
-            className="hidden sm:flex items-center gap-2 text-on-surface-variant hover:text-primary transition-all py-2.5 px-4 rounded-xl hover:bg-primary/10 border border-transparent hover:border-primary/20 group"
+            className="hidden lg:flex items-center gap-2 text-on-surface-variant hover:text-primary transition-all py-2.5 px-4 rounded-xl hover:bg-primary/10 border border-transparent hover:border-primary/20 group"
           >
             <span className="material-symbols-outlined text-sm group-hover:rotate-12 transition-transform">history</span>
             <span className="text-xs font-black uppercase tracking-widest pt-0.5 whitespace-nowrap">Recent</span>
           </button>
 
-          <motion.div 
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center"
-          >
+          <div className="hidden sm:flex items-center">
             <a 
               href="https://github.com/intelli4code" 
               target="_blank" 
@@ -71,9 +70,64 @@ export default function Navbar() {
               <span className="material-symbols-outlined text-sm">code</span>
               API <span className="hidden sm:inline">Docs</span>
             </a>
-          </motion.div>
+          </div>
+
+          {/* Mobile Hamburger */}
+          <button 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="lg:hidden p-2.5 rounded-xl hover:bg-primary/10 text-on-surface-variant hover:text-primary transition-all border border-transparent hover:border-primary/20"
+          >
+            <span className="material-symbols-outlined text-2xl">
+              {isMobileMenuOpen ? "close" : "menu"}
+            </span>
+          </button>
         </div>
       </div>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="lg:hidden bg-glass-bg border-t border-on-surface-variant/10 overflow-hidden"
+          >
+            <div className="flex flex-col gap-2 p-6">
+              {navLinks.map((link, idx) => (
+                <Link 
+                  key={idx}
+                  to={link.path}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-base font-bold text-on-surface hover:text-primary p-3 rounded-xl hover:bg-primary/5 transition-all flex items-center justify-between"
+                >
+                  {link.name}
+                  <span className="material-symbols-outlined text-sm opacity-20">chevron_right</span>
+                </Link>
+              ))}
+              <div className="h-px bg-on-surface-variant/10 my-4" />
+              <button 
+                onClick={() => {
+                  setIsHistoryOpen(true);
+                  setIsMobileMenuOpen(false);
+                }}
+                className="flex items-center gap-3 p-3 text-on-surface font-bold hover:text-primary transition-all"
+              >
+                <span className="material-symbols-outlined">history</span>
+                Recent Generations
+              </button>
+              <a 
+                href="https://github.com/intelli4code" 
+                target="_blank" 
+                className="mt-4 bg-primary text-slate-900 dark:text-sky-950 p-4 rounded-2xl flex items-center justify-center gap-3 font-black text-sm uppercase tracking-widest shadow-xl shadow-primary/20"
+              >
+                <span className="material-symbols-outlined">code</span>
+                API Documentation
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 }

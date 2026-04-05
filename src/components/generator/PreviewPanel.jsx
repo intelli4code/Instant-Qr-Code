@@ -49,6 +49,11 @@ export default function PreviewPanel({ debouncedConfig, isGenerating }) {
   };
 
   useEffect(() => {
+    // Clear previous QR rendering to ensure a fresh state
+    if (ref.current) {
+      ref.current.innerHTML = "";
+    }
+
     const data = getDataString(debouncedConfig);
     const options = {
       width: 400, // Higher resolution for cleaner downloads
@@ -79,13 +84,11 @@ export default function PreviewPanel({ debouncedConfig, isGenerating }) {
       }
     };
 
-    if (!qrCode.current) {
-      qrCode.current = new QRCodeStyling(options);
-      if (ref.current) {
-        qrCode.current.append(ref.current);
-      }
-    } else {
-      qrCode.current.update(options);
+    // Always create a fresh instance for maximum reliability with file downloads
+    qrCode.current = new QRCodeStyling(options);
+    
+    if (ref.current) {
+      qrCode.current.append(ref.current);
     }
 
     // Capture the Data URL for the simulator
@@ -97,12 +100,24 @@ export default function PreviewPanel({ debouncedConfig, isGenerating }) {
   }, [debouncedConfig]);
 
   const handleDownload = (ext) => {
-    if (!qrCode.current) return;
+    if (!qrCode.current) {
+      console.warn("QR Code instance not ready yet");
+      return;
+    }
+    
+    const data = getDataString(debouncedConfig);
+    console.log(`[Instant QR] Executing Download (${ext}) with data: ${data}`);
     qrCode.current.download({ name: "instant-qr", extension: ext });
   };
 
   const handlePDFDownload = async () => {
-    if (!qrCode.current) return;
+    if (!qrCode.current) {
+      console.warn("QR Code instance not ready yet");
+      return;
+    }
+    
+    const data = getDataString(debouncedConfig);
+    console.log(`[Instant QR] Generating PDF Labels with data: ${data}`);
     
     // Get the image data from the QR Code
     const blob = await qrCode.current.getRawData("png");

@@ -4,7 +4,7 @@ export default function ScanSimulator({ isOpen, onClose, qrDataUrl }) {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-8 md:p-16">
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -17,7 +17,7 @@ export default function ScanSimulator({ isOpen, onClose, qrDataUrl }) {
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
-            className="relative w-full max-w-sm bg-slate-900 rounded-[3rem] border-8 border-slate-800 shadow-2xl overflow-hidden aspect-[9/19] flex flex-col"
+            className="relative h-full max-h-[85vh] aspect-[9/19] bg-slate-900 rounded-[3rem] border-8 border-slate-800 shadow-2xl overflow-hidden flex flex-col mx-auto"
           >
             {/* Phone Notch */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-slate-800 rounded-b-2xl z-10" />
@@ -70,10 +70,10 @@ export default function ScanSimulator({ isOpen, onClose, qrDataUrl }) {
 
           {/* Toast Notification Mockup */}
           <motion.div 
-            initial={{ y: -100 }}
-            animate={{ y: 80 }}
+            initial={{ y: -100, x: "-50%" }}
+            animate={{ y: 60, x: "-50%" }}
             transition={{ delay: 1, type: "spring" }}
-            className="absolute top-0 w-full max-w-[280px] bg-white/90 backdrop-blur-md rounded-2xl p-3 flex items-center gap-3 shadow-xl z-[210]"
+            className="absolute top-0 left-1/2 w-[90%] max-w-[280px] bg-white/90 backdrop-blur-md rounded-2xl p-3 flex items-center gap-3 shadow-xl z-[210] border border-white/20"
           >
             <div className="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center text-primary">
               <span className="material-symbols-outlined">link</span>

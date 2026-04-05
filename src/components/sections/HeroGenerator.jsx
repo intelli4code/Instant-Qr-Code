@@ -2,11 +2,11 @@ import { motion } from "framer-motion";
 
 export default function HeroGenerator({ children }) {
   return (
-    <section className="relative pt-32 pb-20 px-6 min-h-[90vh] flex flex-col items-center justify-center overflow-hidden bg-background transition-colors duration-500">
+    <section className="relative pt-24 md:pt-32 pb-20 px-6 min-h-[90vh] flex flex-col items-center justify-center overflow-hidden bg-background transition-colors duration-500">
       
       {/* Background radial glows - Fixed for responsive centering */}
-      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 dark:bg-primary/5 blur-[120px] rounded-full" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-500/10 dark:bg-blue-500/5 blur-[120px] rounded-full" />
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 dark:bg-primary/5 blur-[80px] rounded-full" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-500/10 dark:bg-blue-500/5 blur-[80px] rounded-full" />
       
       <div className="max-w-7xl mx-auto flex flex-col items-center text-center relative z-10 w-full">
         <motion.div 
@@ -17,10 +17,10 @@ export default function HeroGenerator({ children }) {
         >
           <div className="flex items-center justify-center gap-3 mb-6">
             <span className="h-px w-8 bg-primary/30"></span>
-            <span className="text-primary font-black uppercase tracking-[0.4em] text-[10px] md:text-xs">Professional QR toolkit</span>
+            <span className="text-primary font-black uppercase tracking-[0.4em] text-[10px] md:text-sm">Professional QR toolkit</span>
             <span className="h-px w-8 bg-primary/30"></span>
           </div>
-          <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-on-surface mb-6 leading-[0.9] text-glow transition-all">
+          <h1 className="text-4xl sm:text-5xl md:text-8xl font-black tracking-tighter text-on-surface mb-6 leading-[0.9] text-glow transition-all">
             Generate <span className="text-primary italic">Instant</span> <br className="hidden md:block" /> QR Codes
           </h1>
           <p className="text-on-surface-variant text-base md:text-xl font-medium max-w-2xl mx-auto leading-relaxed px-4">

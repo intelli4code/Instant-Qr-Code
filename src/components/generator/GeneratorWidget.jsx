@@ -45,7 +45,7 @@ export default function GeneratorWidget() {
   });
 
   const [isGenerating, setIsGenerating] = useState(false);
-  const debouncedConfig = useDebounce(config, 2000);
+  const debouncedConfig = useDebounce(config, 400);
 
   // Sync with selected history item
   useEffect(() => {
@@ -74,10 +74,10 @@ export default function GeneratorWidget() {
   }, [debouncedConfig, setHistory]);
 
   return (
-    <div className="w-full max-w-[1200px] lg:w-[75%] min-h-[700px] mx-auto glass-card-elevated rounded-[2.5rem] shadow-2xl flex flex-col md:grid md:grid-cols-12 overflow-hidden text-left border border-white/5 dark:border-sky-400/10 transition-all duration-500">
+    <div className="w-full max-w-[1200px] lg:w-[75%] min-h-0 mx-auto glass-card-elevated rounded-[2.5rem] shadow-2xl flex flex-col lg:grid lg:grid-cols-12 overflow-hidden text-left border border-white/5 dark:border-sky-400/10 transition-all duration-500">
       
       {/* Left Column: Settings */}
-      <div className="md:col-span-7 p-10 border-b md:border-b-0 md:border-r border-sky-400/10 bg-surface/30 backdrop-blur-md">
+      <div className="lg:col-span-7 p-6 md:p-10 border-b lg:border-b-0 lg:border-r border-sky-400/10 bg-surface/30 backdrop-blur-md">
         
         {/* Tab Switcher */}
         <div className="flex gap-4 mb-10 overflow-x-auto pb-2 scrollbar-hide">
@@ -116,7 +116,7 @@ export default function GeneratorWidget() {
       </div>
 
       {/* Right Column: Preview */}
-      <div className="md:col-span-5 p-10 flex flex-col items-center justify-center bg-primary/5 dark:bg-slate-950/40 relative">
+      <div className="lg:col-span-5 p-5 md:p-10 flex flex-col items-center justify-center bg-primary/5 dark:bg-slate-950/40 relative">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent pointer-events-none" />
         <PreviewPanel 
           debouncedConfig={debouncedConfig} 

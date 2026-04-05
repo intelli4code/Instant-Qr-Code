@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 export default function ContentTabs({ config, setConfig }) {
   const handleCategoryChange = (cat) => {
     setConfig({ ...config, category: cat });
@@ -45,13 +47,28 @@ export default function ContentTabs({ config, setConfig }) {
         <div className="w-full">
           {config.category === "url" && (
             <div className="space-y-8">
-              <input 
-                type="url"
-                placeholder="https://example.com"
-                value={config.content.url}
-                onChange={(e) => handleContentChange("url", e.target.value)}
-                className="w-full bg-surface/40 border border-on-surface-variant/10 rounded-2xl px-6 py-5 focus:ring-4 focus:ring-primary/10 focus:border-primary/50 outline-none transition-all text-on-surface placeholder-on-surface-variant/40 font-bold font-inter shadow-sm"
-              />
+              <div className="relative">
+                <input 
+                  type="text"
+                  placeholder="https://example.com"
+                  value={config.content.url}
+                  onChange={(e) => handleContentChange("url", e.target.value)}
+                  className={`w-full bg-surface/40 border rounded-2xl px-6 py-5 focus:ring-4 outline-none transition-all text-on-surface placeholder-on-surface-variant/40 font-bold font-inter shadow-sm ${
+                    config.content.url && !/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/.test(config.content.url)
+                      ? "border-red-500/50 focus:ring-red-500/10 focus:border-red-500 shadow-[0_0_15px_rgba(239,68,68,0.1)]"
+                      : "border-on-surface-variant/10 focus:ring-primary/10 focus:border-primary/50"
+                  }`}
+                />
+                {config.content.url && !/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/.test(config.content.url) && (
+                  <motion.p 
+                    initial={{ opacity: 0, y: -10 }} 
+                    animate={{ opacity: 1, y: 0 }}
+                    className="absolute -bottom-6 left-2 text-[10px] text-red-500 font-black uppercase tracking-widest"
+                  >
+                    Please enter a valid URL
+                  </motion.p>
+                )}
+              </div>
               {/* Pro Tip */}
               <div className="bg-primary/5 border border-primary/10 rounded-[2rem] p-6 flex gap-4 backdrop-blur-sm">
                 <span className="material-symbols-outlined text-primary text-xl">lightbulb</span>

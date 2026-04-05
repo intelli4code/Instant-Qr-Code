@@ -4,7 +4,7 @@ export default function PrivacyShield() {
   return (
     <section className="py-24 bg-surface-container relative overflow-hidden">
       {/* Background glow logic to match Hero */}
-      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/5 blur-3xl rounded-full" />
+      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/5 blur-2xl rounded-full" />
       
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 items-center gap-16">
         <motion.div 
@@ -14,9 +14,9 @@ export default function PrivacyShield() {
           transition={{ duration: 0.8 }}
           className="order-2 md:order-1"
         >
-          <div className="flex items-center gap-4 mb-8">
-            <span className="material-symbols-outlined text-primary text-6xl md:text-8xl drop-shadow-[0_0_20px_rgba(14,165,233,0.3)]">shield_locked</span>
-            <h2 className="text-3xl md:text-5xl font-extrabold text-on-surface text-glow leading-tight">Military-Grade <br className="hidden md:block" /> Privacy</h2>
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-8 mb-12">
+            <span className="material-symbols-outlined text-primary text-7xl md:text-8xl drop-shadow-[0_0_20px_rgba(14,165,233,0.3)]">shield_locked</span>
+            <h2 className="text-4xl md:text-6xl font-extrabold text-on-surface text-glow leading-tight text-center sm:text-left">Military-Grade <br className="hidden md:block" /> Privacy</h2>
           </div>
           <p className="text-on-surface-variant text-lg leading-relaxed mb-6 font-medium">
             We believe your data belongs to you. Unlike other QR generators that send your information to their servers for tracking, <span className="text-primary font-black italic">Instant QR generates everything directly in your browser.</span>
@@ -55,10 +55,10 @@ export default function PrivacyShield() {
             <motion.div 
               animate={{ scale: [1, 1.05, 1], opacity: [0.1, 0.2, 0.1] }}
               transition={{ repeat: Infinity, duration: 4 }}
-              className="absolute inset-0 bg-primary rounded-full blur-3xl"
+              className="absolute inset-0 bg-primary rounded-full blur-2xl"
             />
             <div className="relative glass-card-elevated w-64 h-64 md:w-80 md:h-80 rounded-full flex items-center justify-center border border-primary/20">
-              <span className="material-symbols-outlined text-primary text-8xl md:text-9xl animate-pulse">lock_person</span>
+              <span className="material-symbols-outlined text-primary text-8xl md:text-[180px] animate-pulse">lock_person</span>
             </div>
           </div>
         </motion.div>
