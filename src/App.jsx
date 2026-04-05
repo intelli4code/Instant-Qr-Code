@@ -7,16 +7,18 @@ import Privacy from "./pages/Privacy";
 import License from "./pages/License";
 import ScrollToHash from "./components/utils/ScrollToHash";
 import { HistoryProvider } from "./context/HistoryContext";
+import { ThemeProvider } from "./context/ThemeContext";
 
 export default function App() {
   return (
     <Router>
-      <HistoryProvider>
-        <ScrollToHash />
-        <div className="min-h-screen bg-background flex flex-col font-inter text-slate-200">
-          <Navbar />
-          
-          <Routes>
+      <ThemeProvider>
+        <HistoryProvider>
+          <ScrollToHash />
+          <div className="min-h-screen bg-white dark:bg-background flex flex-col font-inter text-slate-900 dark:text-slate-200 transition-colors duration-300">
+            <Navbar />
+            
+            <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/privacy" element={<Privacy />} />
@@ -25,7 +27,8 @@ export default function App() {
 
           <Footer />
         </div>
-      </HistoryProvider>
+        </HistoryProvider>
+      </ThemeProvider>
     </Router>
   );
 }

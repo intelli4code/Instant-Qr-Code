@@ -5,8 +5,20 @@
   line-height: 1.5;
   font-weight: 400;
 
+  /* Theme Transitions */
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  /* Default Light Mode Vars (though we'll default to dark in UI) */
+  --background: #f8fafc;
+  --surface: rgba(255, 255, 255, 0.7);
+  --on-surface: #1e293b;
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(125, 211, 252, 0.2);
+  --glass-elevated: rgba(255, 255, 255, 0.85);
+
   color-scheme: light dark;
-  background-color: #0a0e1a;
+  background-color: var(--background);
+  color: var(--on-surface);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -14,10 +26,20 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+html.dark {
+  --background: #0a0e1a;
+  --surface: #0f1524;
+  --on-surface: #e0e8f0;
+  --glass-bg: rgba(15, 21, 36, 0.6);
+  --glass-border: rgba(125, 211, 252, 0.1);
+  --glass-elevated: rgba(15, 21, 36, 0.75);
+}
+
 body {
   margin: 0;
   min-width: 320px;
-  background-color: #0a0e1a;
+  background-color: var(--background);
+  color: var(--on-surface);
   overflow-x: hidden;
 }
 
@@ -29,15 +51,15 @@ body {
   }
 
   .glass-card {
-    background: rgba(15, 21, 36, 0.6);
+    background: var(--glass-bg);
     backdrop-filter: blur(16px);
-    border: 1px solid rgba(125, 211, 252, 0.1);
+    border: 1px solid var(--glass-border);
   }
 
   .glass-card-elevated {
-    background: rgba(15, 21, 36, 0.75);
+    background: var(--glass-elevated);
     backdrop-filter: blur(24px);
-    border: 1px solid rgba(125, 211, 252, 0.15);
+    border: 1px solid var(--glass-border);
   }
 
   .text-glow {
