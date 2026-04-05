@@ -1,10 +1,13 @@
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import QRCodeStyling from "qr-code-styling";
 import { jsPDF } from "jspdf";
+import ScanSimulator from "./ScanSimulator";
 
 export default function PreviewPanel({ debouncedConfig, isGenerating }) {
   const ref = useRef(null);
   const qrCode = useRef(null);
+  const [isSimulatorOpen, setIsSimulatorOpen] = useState(false);
+  const [qrDataUrl, setQrDataUrl] = useState(null);
 
   const getDataString = (config) => {
     const { category, content } = config;
@@ -84,6 +87,13 @@ export default function PreviewPanel({ debouncedConfig, isGenerating }) {
     } else {
       qrCode.current.update(options);
     }
+
+    // Capture the Data URL for the simulator
+    qrCode.current.getRawData("png").then(blob => {
+      const reader = new FileReader();
+      reader.onloadend = () => setQrDataUrl(reader.result);
+      reader.readAsDataURL(blob);
+    });
   }, [debouncedConfig]);
 
   const handleDownload = (ext) => {
@@ -155,7 +165,7 @@ export default function PreviewPanel({ debouncedConfig, isGenerating }) {
         <div className="grid grid-cols-2 gap-3">
           <button
             onClick={() => handleDownload("svg")}
-            className="w-full bg-slate-900 border border-sky-400/10 hover:bg-slate-950 text-slate-300 font-bold py-3 rounded-xl transition-all flex items-center justify-center gap-2 active:scale-95 text-[10px] uppercase tracking-widest"
+            className="w-full bg-slate-900 border border-slate-200 dark:border-sky-400/10 hover:bg-slate-200 dark:hover:bg-slate-950 text-slate-800 dark:text-slate-300 font-bold py-3 rounded-xl transition-all flex items-center justify-center gap-2 active:scale-95 text-[10px] uppercase tracking-widest"
           >
             SVG Vector
           </button>
@@ -167,11 +177,24 @@ export default function PreviewPanel({ debouncedConfig, isGenerating }) {
             Labels
           </button>
         </div>
+        <button
+          onClick={() => setIsSimulatorOpen(true)}
+          className="w-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-sky-400/10 hover:bg-slate-200 dark:hover:bg-slate-950 text-slate-800 dark:text-sky-300 font-bold py-3 rounded-xl transition-all flex items-center justify-center gap-2 active:scale-95 text-[10px] uppercase tracking-widest mt-2"
+        >
+          <span className="material-symbols-outlined text-sm">phone_iphone</span>
+          See it on Mobile
+        </button>
       </div>
       
-      <p className="mt-4 text-[10px] uppercase tracking-[0.2em] font-bold text-on-surface-variant/40 text-center animate-pulse">
+      <p className="mt-4 text-[10px] uppercase tracking-[0.2em] font-bold text-on-surface-variant/40 dark:text-on-surface-variant/40 text-center animate-pulse">
         Ready for high-res print
       </p>
+
+      <ScanSimulator 
+        isOpen={isSimulatorOpen} 
+        onClose={() => setIsSimulatorOpen(false)} 
+        qrDataUrl={qrDataUrl} 
+      />
 
       <style>{`
         .preview-qr-wrapper canvas, .preview-qr-wrapper svg {
