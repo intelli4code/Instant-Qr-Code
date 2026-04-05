@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import License from "./pages/License";
+import BulkGenerator from "./pages/BulkGenerator";
 import ScrollToHash from "./components/utils/ScrollToHash";
 import { HistoryProvider } from "./context/HistoryContext";
 import { ThemeProvider } from "./context/ThemeContext";
@@ -19,11 +20,12 @@ export default function App() {
             <Navbar />
             
             <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/terms" element={<Terms />} />
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="/license" element={<License />} />
-          </Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/bulk" element={<BulkGenerator />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/license" element={<License />} />
+            </Routes>
 
           <Footer />
         </div>
