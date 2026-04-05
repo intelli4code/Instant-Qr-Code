@@ -6,23 +6,52 @@ export default function PreviewPanel({ debouncedConfig, isGenerating }) {
   const qrCode = useRef(null);
 
   const getDataString = (config) => {
-    if (config.category === "url") return config.content.url || "https://example.com";
-    if (config.category === "text") return config.content.text || "Hello World";
-    if (config.category === "wifi") {
-      const { ssid, password, encryption } = config.content.wifi;
+    const { category, content } = config;
+    
+    if (category === "url") return content.url || "https://example.com";
+    if (category === "text") return content.text || "Hello World";
+    
+    if (category === "wifi") {
+      const { ssid, password, encryption } = content.wifi;
       if (!ssid) return "WIFI:S:Example;T:nopass;P:;;";
       return `WIFI:S:${ssid};T:${encryption};P:${password};;`;
     }
+
+    if (category === "vcard") {
+      const v = content.vcard;
+      // Filter out empty lines to keep the QR code less dense
+      const vcardLines = [
+        "BEGIN:VCARD",
+        "VERSION:3.0",
+        v.firstName || v.lastName ? `FN:${v.firstName} ${v.lastName}`.trim() : "",
+        v.firstName || v.lastName ? `N:${v.lastName};${v.firstName};;;` : "",
+        v.company ? `ORG:${v.company}` : "",
+        v.title ? `TITLE:${v.title}` : "",
+        v.phone ? `TEL;TYPE=CELL:${v.phone}` : "",
+        v.workPhone ? `TEL;TYPE=WORK:${v.workPhone}` : "",
+        v.fax ? `TEL;TYPE=FAX:${v.fax}` : "",
+        v.email ? `EMAIL:${v.email}` : "",
+        v.website ? `URL:${v.website}` : "",
+        v.street || v.city || v.state || v.zip || v.country 
+          ? `ADR;TYPE=WORK:;;${v.street};${v.city};${v.state};${v.zip};${v.country}` 
+          : "",
+        "END:VCARD"
+      ].filter(line => line !== "");
+      
+      return vcardLines.join("\n");
+    }
+
     return "https://example.com";
   };
 
   useEffect(() => {
     const data = getDataString(debouncedConfig);
     const options = {
-      width: 200,
-      height: 200,
+      width: 400, // Higher resolution for cleaner downloads
+      height: 400,
       type: "svg",
       data: data,
+      margin: 20, // Centering and background visibility
       dotsOptions: {
         color: debouncedConfig.design.fgColor,
         type: debouncedConfig.design.pattern === "squares" ? "square" : debouncedConfig.design.pattern === "dots" ? "dots" : "rounded",
@@ -58,14 +87,12 @@ export default function PreviewPanel({ debouncedConfig, isGenerating }) {
   return (
     <div className="flex flex-col items-center w-full">
       <div className="relative group mb-8">
-        {/* Glow effect from design ref */}
         <div className="absolute -inset-4 bg-primary/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-2xl shadow-primary/30" />
         
-        <div className="relative bg-white p-6 rounded-2xl shadow-inner border border-white/5 transition-all group-hover:scale-[1.02]">
-          {/* SVG/Canvas Container */}
-          <div ref={ref} className="w-48 h-48 flex items-center justify-center p-2" />
+        {/* Preview Container */}
+        <div className="relative bg-white p-2 rounded-2xl shadow-inner border border-white/5 transition-all group-hover:scale-[1.02] overflow-hidden">
+          <div ref={ref} className="w-48 h-48 flex items-center justify-center preview-qr-wrapper" />
           
-          {/* Loading ring from Designref */}
           {isGenerating && (
             <div className="absolute inset-0 flex items-center justify-center bg-white/80 rounded-2xl transition-all duration-300 z-10">
               <div className="w-10 h-10 border-4 border-primary/30 border-t-primary rounded-full animate-spin shadow-lg shadow-primary/10"></div>
@@ -93,6 +120,14 @@ export default function PreviewPanel({ debouncedConfig, isGenerating }) {
       <p className="mt-4 text-[10px] uppercase tracking-[0.2em] font-bold text-on-surface-variant/40 text-center animate-pulse">
         Ready for high-res print
       </p>
+
+      <style>{`
+        .preview-qr-wrapper canvas, .preview-qr-wrapper svg {
+          width: 100% !important;
+          height: 100% !important;
+          border-radius: 0.75rem;
+        }
+      `}</style>
     </div>
   );
 }
